@@ -1,41 +1,95 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc";
 import Title from "../../../components/Title"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
+import Swal from 'sweetalert2'
+import useAxios from "../../../hooks/useAxios";
+import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
+    const { loginUser, loginWithGoogle, setLoading } = useAuth()
     const [showPass, setShowPass] = useState(false);
+    const axiosBase = useAxios()
+    const navigate = useNavigate()
 
     const handleShowPass = () => {
         setShowPass(!showPass);
     };
 
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const formValues = Object.fromEntries(formData)
 
-    const handleLogin = () => {
-
+        const { email, password } = formValues
+        loginUser(email, password)
+            .then(res => {
+                if (res.user) {
+                    e.target.reset()
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Welcome Back",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    navigate(location?.state ? location.state : "/");
+                }
+            })
     }
 
     const handleGoogleLogin = () => {
         loginWithGoogle()
-            .then(() => {
-                toast.success("Sign In Successful");
-                navigate(location?.state ? location.state : "/");
+            .then((res) => {
+                const email = res?.user?.email
+                const displayName = res?.user?.displayName
+                const userData = { email, displayName }
+
+                axiosBase.post('/users/add', userData)
+                    .then(res => {
+                        if (res.data.acknowledged) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "User Created Successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate(location?.state ? location.state : "/");
+                        }
+                        if (res.data.oldUser) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Welcome Back",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate(location?.state ? location.state : "/");
+                        }
+                    })
             })
             .catch(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Something Went Wrong!",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 setLoading(false);
-                toast.error("Sign In Failed");
             });
     };
 
     return (
         <>
             <Title title="Login" />
-            <div className="flex justify-center items-center mt-28 md:mt-36 mb-14 md:mb-24">
-                <div className="card w-full max-w-4xl bg-white dark:bg-gray-800 shadow-xl flex flex-col md:flex-row rounded-lg  pt-10 md:pt-0">
+            <div className="flex justify-center items-center pt-28 md:pt-36 mb-14 md:mb-24">
+                <div className="card w-full max-w-4xl bg-white shadow-xl flex flex-col md:flex-row rounded-lg  pt-10 md:pt-0">
                     <div className="w-1/2 mx-auto md:mx-0">
                         <img
-                            src="/auth/login.gif"
+                            src="/gifs/login.gif"
                             alt="Login Illustration"
                             className="rounded-full md:rounded-none md:rounded-l-lg w-full h-full object-cover"
                         />
@@ -92,7 +146,7 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control">
-                                <button className="btn dark:text-white bg-light-primary hover:bg-light-primary/90 dark:bg-dark-primary dark:hover:bg-dark-primary/90">
+                                <button className="btn  bg-brand-primary hover:bg-brand-accent text-white">
                                     Login
                                 </button>
                             </div>

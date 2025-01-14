@@ -21,23 +21,25 @@ const ApplicationTips = () => {
     ];
 
     return (
-        <section className="w-11/12 md:container xl:w-9/12 mx-auto mb-14 lg:mb-24">
-            <SectionTitle
-                heading="Scholarship Application Tips"
-                subHeading="Boost your chances with these essential tips for a successful application."
-            />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {
-                    tipsData?.map((tip, index) => {
-                        return <div key={index} className={`bg-card-accent flex flex-col items-center p-6 rounded-lg shadow-lg text-center ${index === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}`}>
-                            <div className="text-brand-accent mb-4 text-4xl">
-                                {tip.icon}
+        <section className="bg-slate-300 mb-14 lg:mb-24">
+            <div className="w-11/12 md:container xl:w-9/12 mx-auto py-14 lg:py-24">
+                <SectionTitle
+                    heading="Scholarship Application Tips"
+                    subHeading="Boost your chances with these essential tips for a successful application."
+                />
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {
+                        tipsData?.map((tip, index) => {
+                            return <div key={index} className={`bg-card-accent flex flex-col items-center p-6 rounded-lg shadow-lg text-center ${index === 2 ? 'sm:col-span-2 lg:col-span-1' : ''}`}>
+                                <div className="text-brand-accent mb-4 text-4xl">
+                                    {tip.icon}
+                                </div>
+                                <h3 className="text-xl font-semibold text-gray-800">{tip.heading}</h3>
+                                <p className="text-gray-600 mt-3 text-sm md:text-base">{tip.description}</p>
                             </div>
-                            <h3 className="text-xl font-semibold text-gray-800">{tip.heading}</h3>
-                            <p className="text-gray-600 mt-3 text-sm md:text-base">{tip.description}</p>
-                        </div>
-                    })
-                }
+                        })
+                    }
+                </div>
             </div>
         </section>
     )

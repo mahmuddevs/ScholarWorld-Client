@@ -2,12 +2,13 @@ import { useState } from "react"
 import { FaBarsStaggered } from "react-icons/fa6";
 import { IoMdClose } from "react-icons/io"
 import { Link, NavLink } from "react-router-dom"
+import { Tooltip } from 'react-tooltip'
 import { motion } from "motion/react"
 import useAuth from "../hooks/useAuth";
 
 const Header = () => {
     const [navOpen, setNavOpen] = useState(false)
-    const { user } = useAuth()
+    const { user, logOut } = useAuth()
     const navItems = (
         <>
             <li className="flex justify-between">
@@ -22,6 +23,15 @@ const Header = () => {
             </li>
         </>
     )
+
+    const handleLogout = () => {
+        logOut().then(() => {
+            console.log('user logged out')
+        })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
 
     return (
         <header className="z-50 fixed top-0 left-0 right-0 bg-[#151515]/60 drop-shadow-lg backdrop-blur-lg">
@@ -55,7 +65,7 @@ const Header = () => {
                                             <p className="font-bold !text-sm">{user?.displayName}</p>
                                             <button
                                                 onClick={handleLogout}
-                                                className="px-4 py-2 bg-primary-new text-white rounded-lg hover:bg-secondary-new"
+                                                className="px-4 py-2 bg-brand-primary text-white rounded-lg hover:bg-brand-accent transition-colors"
                                             >
                                                 Logout
                                             </button>

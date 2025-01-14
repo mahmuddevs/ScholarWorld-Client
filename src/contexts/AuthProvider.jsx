@@ -42,20 +42,21 @@ const AuthProvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser)
-            const email = currentUser?.email
-            try {
-                if (email) {
-                    const response = await axiosBase.post('/auth/jwt', { email }, { withCredentials: true });
-                    console.log(response.data);
-                } else {
-                    const response = await axiosBase.post('/auth/logout', {}, { withCredentials: true });
-                    console.log('logout', response.data);
-                }
-            } catch (error) {
-                console.error('Error during auth state handling:', error);
-            } finally {
-                setLoading(false);
-            }
+            // const email = currentUser?.email
+            // try {
+            //     if (email) {
+            //         const response = await axiosBase.post('/auth/jwt', { email }, { withCredentials: true });
+            //         console.log(response.data);
+            //     } else {
+            //         const response = await axiosBase.post('/auth/logout', {}, { withCredentials: true });
+            //         console.log('logout', response.data);
+            //     }
+            // } catch (error) {
+            //     console.error('Error during auth state handling:', error);
+            // } finally {
+            //     setLoading(false);
+            // }
+            setLoading(false);
         })
         return () => {
             unsubscribe()

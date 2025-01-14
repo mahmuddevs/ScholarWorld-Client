@@ -18,8 +18,6 @@ const SuccessStories = () => {
             .then(res => setStories(res.data))
     }, []);
 
-    console.log(stories)
-
     return (
         <section className="w-11/12 md:container xl:w-9/12 mx-auto mb-14 lg:mb-24">
             <SectionTitle
