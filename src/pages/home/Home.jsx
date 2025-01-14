@@ -1,6 +1,14 @@
+import Title from "../../components/Title"
+import Banner from "./Banner"
+import TopScolarships from "./TopScolarships"
+
 const Home = () => {
     return (
-        <div>Home</div>
+        <>
+            <Title title="Home" />
+            <Banner />
+            <TopScolarships />
+        </>
     )
 }
 
