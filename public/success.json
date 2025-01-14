@@ -1,0 +1,51 @@
+[
+    {
+        "name": "Emily Carter",
+        "location": "USA to Canada",
+        "image": "https://randomuser.me/api/portraits/women/1.jpg",
+        "testimonial": "Thanks to this platform, I received a full scholarship for my Master's in Computer Science at the University of Toronto. The process was easy and stress-free!",
+        "rating": 5
+    },
+    {
+        "name": "Omar Ibrahim",
+        "location": "Egypt to Germany",
+        "image": "https://randomuser.me/api/portraits/men/2.jpg",
+        "testimonial": "I was awarded a scholarship to study Engineering in Germany. The platform helped me find the perfect scholarship and guided me through every step!",
+        "rating": 4
+    },
+    {
+        "name": "Isabella Martinez",
+        "location": "Mexico to the UK",
+        "image": "https://randomuser.me/api/portraits/women/3.jpg",
+        "testimonial": "I never thought studying abroad would be possible for me, but this platform helped me secure a scholarship for my Master's in London. I'm forever grateful!",
+        "rating": 4.5
+    },
+    {
+        "name": "David Williams",
+        "location": "Australia to France",
+        "image": "https://randomuser.me/api/portraits/men/4.jpg",
+        "testimonial": "I found the ideal scholarship program in France with this platform. I couldn’t have asked for an easier process or more support along the way!",
+        "rating": 4.8
+    },
+    {
+        "name": "Chiamaka Okafor",
+        "location": "Nigeria to Canada",
+        "image": "https://randomuser.me/api/portraits/women/5.jpg",
+        "testimonial": "I always dreamed of studying in Canada, and this platform made it possible. I received a full scholarship for my undergraduate studies at the University of Alberta!",
+        "rating": 5
+    },
+    {
+        "name": "Giovanni Rossi",
+        "location": "Italy to the US",
+        "image": "https://randomuser.me/api/portraits/men/6.jpg",
+        "testimonial": "Studying in the US was always a dream of mine. With the help of this platform, I secured a scholarship at Harvard University for my graduate program!",
+        "rating": 4.7
+    },
+    {
+        "name": "Carlos Pereira",
+        "location": "Brazil to the UK",
+        "image": "https://randomuser.me/api/portraits/men/8.jpg",
+        "testimonial": "I was able to secure a scholarship for my postgraduate studies in the UK. The guidance and resources provided by the platform were extremely helpful.",
+        "rating": 4.2
+    }
+]
