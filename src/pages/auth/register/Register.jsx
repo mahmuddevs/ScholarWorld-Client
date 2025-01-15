@@ -7,11 +7,14 @@ import Title from "../../../components/Title";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import useAxios from "../../../hooks/useAxios";
+import axios from "axios";
+
+const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
+const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 
 const Register = () => {
     const [showPass, setShowPass] = useState(false);
-    const [loading, setLoading] = useState(false);
-    const { loginWithGoogle } = useAuth();
+    const { loginWithGoogle, registerUser, loading, setLoading, updateDetails } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -21,51 +24,89 @@ const Register = () => {
         setShowPass((prev) => !prev);
     };
 
-    const handleGoogleLogin = async () => {
-        setLoading(true);
-        try {
-            const res = await loginWithGoogle();
-            const email = res?.user?.email;
-            const displayName = res?.user?.displayName;
-            const userData = { email, displayName };
+    const handleGoogleLogin = () => {
+        loginWithGoogle()
+            .then((res) => {
+                const email = res?.user?.email
+                const displayName = res?.user?.displayName
+                const userData = { email, displayName }
 
-            const response = await axiosBase.post("/users/add", userData);
-            setLoading(false);
-
-            if (response.data.acknowledged) {
+                axiosBase.post('/users/add', userData)
+                    .then(res => {
+                        if (res.data.acknowledged) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "User Created Successfully",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate(location?.state ? location.state : "/");
+                        }
+                        if (res.data.oldUser) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Welcome Back",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate(location?.state ? location.state : "/");
+                        }
+                    })
+            })
+            .catch(() => {
                 Swal.fire({
                     position: "top-end",
-                    icon: "success",
-                    title: "User Created Successfully",
+                    icon: "error",
+                    title: "Something Went Wrong!",
                     showConfirmButton: false,
-                    timer: 1500,
+                    timer: 1500
                 });
-                navigate(location.state || "/");
-            }
-            if (response.data.oldUser) {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Welcome Back",
-                    showConfirmButton: false,
-                    timer: 1500,
-                });
-                navigate(location.state || "/");
-            }
-        } catch {
-            setLoading(false);
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: "Something Went Wrong!",
-                showConfirmButton: false,
-                timer: 1500,
+                setLoading(false);
             });
-        }
     };
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = async (data) => {
+        const { name, email, password } = data
+        const img = { image: data.photo[0] }
+        const res = await axios.post(hostingApi, img, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        const image = res?.data?.data?.display_url
+
+        if (image) {
+            registerUser(email, password)
+                .then(() => {
+                    updateDetails(name, image)
+                        .then(() => {
+                            const userData = { email, displayName: name }
+                            axiosBase.post('/users/add', userData)
+                                .then(res => {
+                                    if (res.data.acknowledged) {
+                                        Swal.fire({
+                                            position: "top-end",
+                                            icon: "success",
+                                            title: "Welcome",
+                                            showConfirmButton: false,
+                                            timer: 1500
+                                        });
+                                        navigate(location?.state ? location.state : "/");
+                                    }
+                                })
+                        })
+                }).catch((err) => {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "Something Went Wrong",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                })
+        }
     };
 
     return (
@@ -102,13 +143,13 @@ const Register = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text text-gray-700">Photo URL</span>
+                                    <span className="label-text text-gray-700">Photo</span>
                                 </label>
                                 <input
-                                    type="url"
-                                    placeholder="Photo URL"
-                                    className="input input-bordered w-full"
-                                    {...register("photoUrl", { required: "Photo URL is Required" })}
+                                    name='photo'
+                                    type="file"
+                                    className="file-input file-input-bordered w-full"
+                                    {...register("photo", { required: "Photo is Required" })}
                                 />
                                 {errors.photoUrl && (
                                     <span className="text-red-600 text-xs mt-1">{errors.photoUrl.message}</span>
