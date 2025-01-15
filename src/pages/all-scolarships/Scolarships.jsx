@@ -6,7 +6,7 @@ const Scolarships = () => {
     return (
         <>
             <Title title='All Scolarships' />
-            <section className="w-11/12 md:container xl:w-9/12 mx-auto pt-24 lg:pt-36 pb-14 lg:pb-24">
+            <section className="w-11/12 md:container xl:w-9/12 mx-auto pt-24 lg:pt-36">
                 <SectionTitle
                     heading='Explore All Scholarships'
                     subHeading='Find the perfect scholarship to support your educational journey.'

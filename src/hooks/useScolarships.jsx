@@ -1,17 +1,20 @@
 import { useQuery } from '@tanstack/react-query'
 import useAxios from './useAxios'
 
-const useScolarships = () => {
+const useScolarships = (currentPage) => {
+    console.log(currentPage)
     const axiosBase = useAxios()
-    const { data: scholarships, isLoading, refetch } = useQuery({
-        queryKey: ['scolarships'],
+    const { data: scholarships = {}, isLoading } = useQuery({
+        queryKey: ['scolarships', currentPage],
         queryFn: async () => {
-            const res = await axiosBase.get('/scolarship')
+            const res = await axiosBase.get(`/scolarship?page=${currentPage}`)
             return res.data
         }
     })
 
-    return [scholarships, isLoading, refetch]
+    const { scolarshipData, totalPages } = scholarships
+
+    return [scolarshipData, totalPages, isLoading]
 }
 
 export default useScolarships

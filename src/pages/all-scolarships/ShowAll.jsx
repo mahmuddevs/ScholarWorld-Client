@@ -1,47 +1,57 @@
 import { useState } from "react";
 import useScolarships from "../../hooks/useScolarships"
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
+import Spinner from "../../components/Spinner";
+import Card from "../../components/Card";
 
 const ShowAll = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [scolarships, isLoading, refetch] = useScolarships()
-    const totalPages = 10
+    const [scolarshipData, totalPages, isLoading] = useScolarships(currentPage)
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
-
-    console.log(currentPage)
     return (
-        <section>
-            <div className="pagination">
-                <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                    className="btn"
-                >
-                    Previous
-                </button>
-
-                <div className="join">
-                    {[...Array(totalPages)].map((_, index) => (
-                        <button
-                            key={index}
-                            className={`join-item btn ${currentPage === index + 1 ? 'btn-active' : ''}`}
-                            onClick={() => handlePageChange(index + 1)}
-                        >
-                            {index + 1}
-                        </button>
-                    ))}
+        <>
+            <section className="w-11/12 md:container xl:w-9/12 mx-auto">
+                {isLoading && <Spinner />}
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full md:w-10/12 mx-auto gap-6">
+                    {
+                        scolarshipData?.map((scolarship) => {
+                            return <Card key={scolarship._id} {...scolarship} />
+                        })
+                    }
                 </div>
-
-                <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                    className="btn"
-                >
-                    Next
-                </button>
-            </div>
-        </section>
+            </section>
+            <section className="flex justify-center items-center mt-8 mb-16">
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                        className={`btn btn-sm text-white bg-brand-primary hover:bg-brand-secondary ${currentPage === 1 ? 'btn-disabled opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                        <FaChevronLeft className="w-4 h-4" />
+                    </button>
+                    <div className="join space-x-1">
+                        {[...Array(totalPages)].map((_, index) => (
+                            <button
+                                key={index}
+                                className={`join-item btn btn-sm ${currentPage === index + 1 ? 'btn-active bg-brand-primary hover:bg-brand-secondary text-white' : 'btn-outline'}`}
+                                onClick={() => handlePageChange(index + 1)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                    </div>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                        className={`btn btn-sm text-white bg-brand-primary hover:bg-brand-secondary ${currentPage === totalPages ? 'btn-disabled opacity-50 cursor-not-allowed' : ''}`}
+                    >
+                        <FaChevronRight className="w-4 h-4" />
+                    </button>
+                </div>
+            </section>
+        </>
     )
 }
 
