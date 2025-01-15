@@ -1,5 +1,4 @@
 import SectionTitle from '../../components/SectionTitle'
-import ReactStars from 'react-rating-stars-component';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -41,7 +40,7 @@ const SuccessStories = () => {
                     className="mySwiper"
                 >
                     {stories?.map((story, index) => (
-                        <SwiperSlide key={index} className="pb-14 h-full hover:cursor-grab">
+                        <SwiperSlide key={index} className="pb-8 h-full hover:cursor-grab">
                             <div className="max-w-xs bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 duration-300 my-4 h-full flex flex-col py-4">
                                 <div className="flex-shrink-0">
                                     <img
@@ -53,9 +52,6 @@ const SuccessStories = () => {
                                 <div className="px-6 py-2 text-center flex-1 flex flex-col justify-between">
                                     <h3 className="font-semibold text-xl text-brand-text">{story.name}</h3>
                                     <p className="text-sm text-gray-500">{story.location}</p>
-                                    <div className="flex justify-center">
-                                        <ReactStars count={5} value={story.rating} size={24} edit={false} activeColor="#ffd700" />
-                                    </div>
                                     <p className="text-gray-600 text-sm md:text-base mt-2">
                                         {story.testimonial}
                                     </p>

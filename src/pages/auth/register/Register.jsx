@@ -151,8 +151,8 @@ const Register = () => {
                                     className="file-input file-input-bordered w-full"
                                     {...register("photo", { required: "Photo is Required" })}
                                 />
-                                {errors.photoUrl && (
-                                    <span className="text-red-600 text-xs mt-1">{errors.photoUrl.message}</span>
+                                {errors.photo && (
+                                    <span className="text-red-600 text-xs mt-1">{errors.photo.message}</span>
                                 )}
                             </div>
                             <div className="form-control">

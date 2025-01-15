@@ -1,7 +1,8 @@
 import { FaBook, FaDollarSign, FaGraduationCap, FaStar } from "react-icons/fa6";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-const Card = ({ universityName, universityImage, scholarshipCategory, location, applicationDeadline,
+const Card = ({ _id, universityName, universityImage, scholarshipCategory, location, applicationDeadline,
     subjectCategory, applicationFees, rating
 }) => {
     return (
@@ -38,7 +39,7 @@ const Card = ({ universityName, universityImage, scholarshipCategory, location, 
                     </p>
                 </div>
                 <div className="card-actions">
-                    <button className="btn h-10 min-h-10 bg-brand-primary hover:bg-brand-accent text-white rounded-lg border-0 px-6">Details</button>
+                    <Link to={`/scolarships/${_id}`} className="btn h-10 min-h-10 bg-brand-primary hover:bg-brand-accent text-white rounded-lg border-0 px-6">Details</Link>
                 </div>
             </div>
         </div>

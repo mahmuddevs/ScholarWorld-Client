@@ -5,6 +5,8 @@ import Auth from "../layouts/Auth";
 import Login from "../pages/auth/login/Login";
 import Register from "../pages/auth/register/Register";
 import Scolarships from "../pages/all-scolarships/Scolarships";
+import PrivateAlt from "./PrivateAlt";
+import ScolarshipDetails from "../pages/scolarship-details/ScolarshipDetails";
 
 const router = createBrowserRouter([
     {
@@ -16,8 +18,12 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: '/all-scolarships',
+                path: '/scolarships',
                 element: <Scolarships />
+            },
+            {
+                path: '/scolarships/:id',
+                element: <ScolarshipDetails />
             },
         ]
 
@@ -32,11 +38,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/auth/login',
-                element: <Login />
+                element: <PrivateAlt><Login /></PrivateAlt>
             },
             {
                 path: '/auth/register',
-                element: <Register />
+                element: <PrivateAlt><Register /></PrivateAlt>
             },
         ]
 

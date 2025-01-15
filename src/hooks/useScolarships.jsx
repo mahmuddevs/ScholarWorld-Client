@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query'
 import useAxios from './useAxios'
 
 const useScolarships = (currentPage) => {
-    console.log(currentPage)
     const axiosBase = useAxios()
     const { data: scholarships = {}, isLoading } = useQuery({
         queryKey: ['scolarships', currentPage],
