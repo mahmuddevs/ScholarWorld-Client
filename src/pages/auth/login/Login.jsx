@@ -90,7 +90,7 @@ const Login = () => {
                     <div className="w-1/2 mx-auto md:mx-0">
                         <img
                             src="/gifs/login.gif"
-                            alt="Login Illustration"
+                            alt=""
                             className="rounded-full md:rounded-none md:rounded-l-lg w-full h-full object-cover"
                         />
                     </div>
