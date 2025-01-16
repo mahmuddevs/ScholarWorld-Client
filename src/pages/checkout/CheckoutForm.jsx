@@ -62,14 +62,26 @@ const CheckoutForm = () => {
             setError(paymentError.message)
         } else {
             if (paymentIntent.status === 'succeeded') {
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: "Payment Succesful",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate(`/application/${id}`)
+                const payment = {
+                    email: user.email,
+                    price: price,
+                    scolarship_id: id
+                }
+
+                axiosBase.post('/stripe/save-transaction', payment)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.acknowledged) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Payment Succesful",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate(`/application/${id}`)
+                        }
+                    })
             }
         }
 

@@ -10,6 +10,7 @@ import ScolarshipDetails from "../pages/scolarship-details/ScolarshipDetails";
 import Private from "./Private";
 import Checkout from "../pages/checkout/Checkout";
 import Application from "../pages/application/Application";
+import Dashboard from "../layouts/Dashboard";
 
 const router = createBrowserRouter([
     {
@@ -58,6 +59,16 @@ const router = createBrowserRouter([
         ]
 
     },
+    {
+        path: '/dashboard',
+        element: <Dashboard />,
+        children: [
+            {
+                path: '/dashboard/user',
+                element: <h1>working</h1>
+            }
+        ]
+    }
 ])
 
 
