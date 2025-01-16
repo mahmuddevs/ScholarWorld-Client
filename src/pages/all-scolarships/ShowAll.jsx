@@ -3,15 +3,34 @@ import useScolarships from "../../hooks/useScolarships"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Spinner from "../../components/Spinner";
 import Card from "../../components/Card";
+import { FaSearch } from "react-icons/fa";
 
 const ShowAll = () => {
+    const [searchQuery, setSearchQuery] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
-    const [scolarshipData, totalPages, isLoading] = useScolarships(currentPage)
+    const [scolarshipData, totalPages, isLoading, refetch] = useScolarships(currentPage, searchQuery)
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        const search = e.target.search.value
+        setCurrentPage(1)
+        setSearchQuery(search)
+        refetch()
+    }
+
     return (
         <>
+            <section className="w-11/12 md:container xl:w-9/12 mx-auto my-16">
+                <form onSubmit={handleSearch}>
+                    <label className="input input-bordered flex items-center gap-2 ms-auto max-w-xs">
+                        <input type="text" className="grow" placeholder="Search" name="search" />
+                        <button type="submit"><FaSearch className="cursor-pointer" /></button>
+                    </label>
+                </form>
+            </section>
             <section className="w-11/12 md:container xl:w-9/12 mx-auto">
                 {isLoading && <Spinner />}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full md:w-10/12 mx-auto gap-6">

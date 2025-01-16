@@ -52,7 +52,7 @@ const Application = () => {
                             timer: 1500
                         });
                         reset()
-                        navigate(`/dashboard/user`)
+                        navigate(`/dashboard/user/my-applications`)
                     }
                 }).catch((err) => {
                     Swal.fire({

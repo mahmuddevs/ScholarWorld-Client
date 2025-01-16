@@ -54,7 +54,8 @@ const Header = () => {
                                     <div className="w-10 rounded-full" id="profile-pic">
                                         <img
                                             alt={user?.displayName}
-                                            src={user?.photoURL} />
+                                            src={user?.photoURL}
+                                        />
                                     </div>
                                     <Tooltip
                                         anchorSelect="#profile-pic"

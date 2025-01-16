@@ -11,11 +11,13 @@ import Private from "./Private";
 import Checkout from "../pages/checkout/Checkout";
 import Application from "../pages/application/Application";
 import Dashboard from "../layouts/Dashboard";
+import Error from "../pages/Error/Error";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/',
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
                 element: <Scolarships />
             },
             {
-                path: '/scolarships/:id',
+                path: '/scolarship/:id',
                 element: <Private><ScolarshipDetails /></Private>
             },
             {
@@ -43,6 +45,7 @@ const router = createBrowserRouter([
     {
         path: '/auth',
         element: <Auth />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/auth',
@@ -62,11 +65,20 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <Dashboard />,
+        errorElement: <Error />,
         children: [
             {
                 path: '/dashboard/user',
                 element: <h1>working</h1>
-            }
+            },
+            {
+                path: '/dashboard/user/my-applications',
+                element: <h1>working</h1>
+            },
+            {
+                path: '/dashboard/user',
+                element: <h1>working</h1>
+            },
         ]
     }
 ])
