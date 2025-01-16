@@ -3,7 +3,7 @@ import { Autoplay } from 'swiper/modules';
 import ReactStars from 'react-rating-stars-component';
 import 'swiper/css';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import useAxios from '../../hooks/useAxios';
 import Spinner from '../../components/Spinner';
 import moment from 'moment'
@@ -14,7 +14,7 @@ const ScholarshipDetails = () => {
     const { data: scholarshipData = {}, isLoading } = useQuery({
         queryKey: ['single-scolarship', id],
         queryFn: async () => {
-            const res = await axiosBase.get(`/scolarship/${id}`)
+            const res = await axiosBase.get(`/scolarship/single/${id}`)
             return res.data
         }
     })
@@ -98,9 +98,9 @@ const ScholarshipDetails = () => {
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit deleniti minus reiciendis, in magnam officia nulla rem dolorem nemo. Beatae sequi voluptatem cum nisi, voluptates corrupti consectetur consequatur dolor?</p>
                             </div>
                             <div className="mt-6">
-                                <button className="bg-brand-primary text-white font-bold py-2 px-4 rounded hover:bg-brand-accent transition duration-300">
+                                <Link to={`/checkout/${scholarshipData._id}`} className="bg-brand-primary text-white font-bold py-2 px-4 rounded hover:bg-brand-accent transition duration-300">
                                     Apply for Scholarship
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     }

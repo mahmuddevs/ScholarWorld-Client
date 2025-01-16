@@ -7,6 +7,9 @@ import Register from "../pages/auth/register/Register";
 import Scolarships from "../pages/all-scolarships/Scolarships";
 import PrivateAlt from "./PrivateAlt";
 import ScolarshipDetails from "../pages/scolarship-details/ScolarshipDetails";
+import Private from "./Private";
+import Checkout from "../pages/checkout/Checkout";
+import Application from "../pages/application/Application";
 
 const router = createBrowserRouter([
     {
@@ -23,8 +26,16 @@ const router = createBrowserRouter([
             },
             {
                 path: '/scolarships/:id',
-                element: <ScolarshipDetails />
+                element: <Private><ScolarshipDetails /></Private>
             },
+            {
+                path: '/checkout/:id',
+                element: <Private><Checkout /></Private>
+            },
+            {
+                path: '/application/:id',
+                element: <Private><Application /></Private>
+            }
         ]
 
     },
