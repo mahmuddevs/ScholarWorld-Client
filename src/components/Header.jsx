@@ -5,10 +5,14 @@ import { Link, NavLink } from "react-router-dom"
 import { Tooltip } from 'react-tooltip'
 import { motion } from "motion/react"
 import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 
 const Header = () => {
     const [navOpen, setNavOpen] = useState(false)
     const { user, logOut } = useAuth()
+    const [userData, userLoading] = useUser()
+    const role = userData?.userType
+
     const navItems = (
         <>
             <li className="flex justify-between">
@@ -19,7 +23,11 @@ const Header = () => {
                 <NavLink to='/scolarships'>All Scholarship</NavLink>
             </li>
             {user && <li>
-                <NavLink to='/'>Dashboard</NavLink>
+                {
+                    role === 'admin' ?
+                        <NavLink to='/dashboard/home'>Dashboard</NavLink> :
+                        <NavLink to='/dashboard'>Dashboard</NavLink>
+                }
             </li>}
         </>
     )

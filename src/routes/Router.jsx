@@ -12,6 +12,15 @@ import Checkout from "../pages/checkout/Checkout";
 import Application from "../pages/application/Application";
 import Dashboard from "../layouts/Dashboard";
 import Error from "../pages/Error/Error";
+import Profile from "../pages/dashboard/common/profile/Profile";
+import AddScolarship from "../pages/dashboard/common/add-scolarship/AddScolarship";
+import ManageScolarship from "../pages/dashboard/common/manage-scolarship/ManageScolarship";
+import ManageApplications from "../pages/dashboard/common/ManageApplications/ManageApplications";
+import ManageUsers from "../pages/dashboard/admin/manage-users/ManageUsers";
+import ManageReview from "../pages/dashboard/common/manage-review/ManageReview";
+import DashboardHome from "../pages/dashboard/admin/home/DashboardHome";
+import MyApplications from "../pages/dashboard/user/my-applications/MyApplications";
+import MyReviews from "../pages/dashboard/user/my-reviews/MyReviews";
 
 const router = createBrowserRouter([
     {
@@ -67,17 +76,63 @@ const router = createBrowserRouter([
         element: <Dashboard />,
         errorElement: <Error />,
         children: [
+            // user routes
             {
-                path: '/dashboard/user',
-                element: <h1>working</h1>
+                path: '/dashboard',
+                element: <Navigate to='/dashboard/my-profile' />
             },
             {
-                path: '/dashboard/user/my-applications',
-                element: <h1>working</h1>
+                path: '/dashboard/my-profile',
+                element: <Profile />
             },
             {
-                path: '/dashboard/user',
-                element: <h1>working</h1>
+                path: '/dashboard/my-applications',
+                element: <MyApplications />
+            },
+            {
+                path: '/dashboard/my-reviews',
+                element: <MyReviews />
+            },
+            // moderator routes
+            {
+                path: 'dashboard/applied-scholarship',
+                element: <>all applied scolarships</>
+            },
+            //admin routes
+            {
+                path: '/dashboard/home',
+                element: <DashboardHome />
+            },
+            {
+                path: '/dashboard/admin-profile',
+                element: <Profile />
+            },
+            {
+                path: '/dashboard/manage-scolarship',
+                element: <ManageScolarship />
+            },
+
+            {
+                path: '/dashboard/manage-users',
+                element: <ManageUsers />
+            },
+            //common
+            {
+                path: '/dashboard/add-scolarship',
+                element: <AddScolarship />
+            },
+            {
+                path: '/dashboard/manage-scolarship',
+                element: <ManageScolarship />
+            },
+            {
+                path: '/dashboard/manage-applied-applications',
+                element: <ManageApplications />
+            },
+            //profile for user and moderator
+            {
+                path: '/dashboard/manage-review',
+                element: <ManageReview />
             },
         ]
     }

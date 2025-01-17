@@ -36,6 +36,15 @@ const Login = () => {
                     });
                     navigate(location?.state ? location.state : "/");
                 }
+            }).catch((err) => {
+                setLoading(false)
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "Wrong Credentials",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
             })
     }
 

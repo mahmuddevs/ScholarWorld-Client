@@ -8,3 +8,7 @@ body {
     font-family: "Inter", serif;
     background-color: #f5faff;
 }
+
+.admin-sidebar a.active {
+    background-color: #374151 !important
+}
