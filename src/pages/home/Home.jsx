@@ -2,14 +2,14 @@ import Title from "../../components/Title"
 import ApplicationTips from "./ApplicationTips"
 import Banner from "./Banner"
 import SuccessStories from "./SuccessStories"
-import TopScolarships from "./TopScolarships"
+import TopScholarships from "./TopScholarships"
 
 const Home = () => {
     return (
         <>
             <Title title="Home" />
             <Banner />
-            <TopScolarships />
+            <TopScholarships />
             <ApplicationTips />
             <SuccessStories />
         </>

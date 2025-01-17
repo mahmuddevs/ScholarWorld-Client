@@ -4,7 +4,7 @@ import useAxios from "../../hooks/useAxios"
 import useAuth from "../../hooks/useAuth"
 import { useNavigate, useParams } from "react-router-dom"
 import Swal from 'sweetalert2'
-import useScolarshipByID from "../../hooks/useScolarshipByID"
+import useScholarshipByID from "../../hooks/useScholarshipByID"
 
 const CheckoutForm = () => {
     const [error, setError] = useState()
@@ -14,10 +14,10 @@ const CheckoutForm = () => {
     const { user } = useAuth()
     const axiosBase = useAxios()
     const { id } = useParams()
-    const [scolarship, isLoading] = useScolarshipByID(id)
+    const [scholarship, isLoading] = useScholarshipByID(id)
     const navigate = useNavigate()
 
-    const price = scolarship?.applicationFees
+    const price = scholarship?.applicationFees
 
     useEffect(() => {
         if (price) {

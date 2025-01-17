@@ -4,7 +4,7 @@ import useUser from "../../../../hooks/useUser";
 const Profile = () => {
     const [userData, userLoading] = useUser()
     const { user } = useAuth()
-    const { displayName, email, userType, photo = '' } = userData
+    const { displayName, email, userType } = userData
 
     return (
         <div className="min-h-screen bg-brand-background flex items-center justify-center p-4">

@@ -5,12 +5,12 @@ import useAxios from "../../hooks/useAxios"
 import { useQuery } from "@tanstack/react-query"
 import Spinner from "../../components/Spinner"
 
-const TopScolarships = () => {
+const TopScholarships = () => {
     const axiosBase = useAxios()
     const { data: scholarships = [], isLoading } = useQuery({
         queryKey: ['top-scolarships'],
         queryFn: async () => {
-            const res = await axiosBase.get(`/scolarship/top-scolarships`)
+            const res = await axiosBase.get(`/scholarship/top-scolarships`)
             return res.data
         }
     })
@@ -24,8 +24,8 @@ const TopScolarships = () => {
                 {isLoading && <Spinner />}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full md:w-10/12 mx-auto gap-6">
                     {
-                        scholarships?.map((scolarship) => {
-                            return <Card key={scolarship._id} {...scolarship} />
+                        scholarships?.map((scholarship) => {
+                            return <Card key={scholarship._id} {...scholarship} />
                         })
                     }
                 </div>
@@ -37,4 +37,4 @@ const TopScolarships = () => {
     )
 }
 
-export default TopScolarships
+export default TopScholarships

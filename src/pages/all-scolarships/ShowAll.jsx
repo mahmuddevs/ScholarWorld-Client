@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useScolarships from "../../hooks/useScolarships"
+import useScholarships from "../../hooks/useScholarships"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import Spinner from "../../components/Spinner";
 import Card from "../../components/Card";
@@ -8,7 +8,7 @@ import { FaSearch } from "react-icons/fa";
 const ShowAll = () => {
     const [searchQuery, setSearchQuery] = useState('')
     const [currentPage, setCurrentPage] = useState(1);
-    const [scolarshipData, totalPages, isLoading, refetch] = useScolarships(currentPage, searchQuery)
+    const [scolarshipData, totalPages, isLoading, refetch] = useScholarships(currentPage, searchQuery)
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -35,8 +35,8 @@ const ShowAll = () => {
                 {isLoading && <Spinner />}
                 <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full md:w-10/12 mx-auto gap-6">
                     {
-                        scolarshipData?.map((scolarship) => {
-                            return <Card key={scolarship._id} {...scolarship} />
+                        scolarshipData?.map((scholarship) => {
+                            return <Card key={scholarship._id} {...scholarship} />
                         })
                     }
                 </div>

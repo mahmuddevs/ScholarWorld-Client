@@ -4,23 +4,23 @@ import Home from "../pages/home/Home";
 import Auth from "../layouts/Auth";
 import Login from "../pages/auth/login/Login";
 import Register from "../pages/auth/register/Register";
-import Scolarships from "../pages/all-scolarships/Scolarships";
+import Scholarships from "../pages/all-scolarships/Scholarships";
 import PrivateAlt from "./PrivateAlt";
-import ScolarshipDetails from "../pages/scolarship-details/ScolarshipDetails";
 import Private from "./Private";
 import Checkout from "../pages/checkout/Checkout";
 import Application from "../pages/application/Application";
 import Dashboard from "../layouts/Dashboard";
 import Error from "../pages/Error/Error";
 import Profile from "../pages/dashboard/common/profile/Profile";
-import AddScolarship from "../pages/dashboard/common/add-scolarship/AddScolarship";
-import ManageScolarship from "../pages/dashboard/common/manage-scolarship/ManageScolarship";
 import ManageApplications from "../pages/dashboard/common/ManageApplications/ManageApplications";
 import ManageUsers from "../pages/dashboard/admin/manage-users/ManageUsers";
 import ManageReview from "../pages/dashboard/common/manage-review/ManageReview";
 import DashboardHome from "../pages/dashboard/admin/home/DashboardHome";
 import MyApplications from "../pages/dashboard/user/my-applications/MyApplications";
 import MyReviews from "../pages/dashboard/user/my-reviews/MyReviews";
+import ScholarshipDetails from "../pages/scolarship-details/ScholarshipDetails";
+import AddScholarship from "../pages/dashboard/common/add-scolarship/AddScholarship";
+import ManageScholarship from "../pages/dashboard/common/manage-scolarship/ManageScholarship";
 
 const router = createBrowserRouter([
     {
@@ -34,11 +34,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/scolarships',
-                element: <Scolarships />
+                element: <Scholarships />
             },
             {
-                path: '/scolarship/:id',
-                element: <Private><ScolarshipDetails /></Private>
+                path: '/scholarship/:id',
+                element: <Private><ScholarshipDetails /></Private>
             },
             {
                 path: '/checkout/:id',
@@ -108,8 +108,8 @@ const router = createBrowserRouter([
                 element: <Profile />
             },
             {
-                path: '/dashboard/manage-scolarship',
-                element: <ManageScolarship />
+                path: '/dashboard/manage-scholarship',
+                element: <ManageScholarship />
             },
 
             {
@@ -118,12 +118,12 @@ const router = createBrowserRouter([
             },
             //common
             {
-                path: '/dashboard/add-scolarship',
-                element: <AddScolarship />
+                path: '/dashboard/add-scholarship',
+                element: <AddScholarship />
             },
             {
-                path: '/dashboard/manage-scolarship',
-                element: <ManageScolarship />
+                path: '/dashboard/manage-scholarship',
+                element: <ManageScholarship />
             },
             {
                 path: '/dashboard/manage-applied-applications',

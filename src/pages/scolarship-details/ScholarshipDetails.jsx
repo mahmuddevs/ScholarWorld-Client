@@ -12,9 +12,9 @@ const ScholarshipDetails = () => {
     const { id } = useParams()
     const axiosBase = useAxios()
     const { data: scholarshipData = {}, isLoading } = useQuery({
-        queryKey: ['single-scolarship', id],
+        queryKey: ['single-scholarship', id],
         queryFn: async () => {
-            const res = await axiosBase.get(`/scolarship/single/${id}`)
+            const res = await axiosBase.get(`/scholarship/single/${id}`)
             return res.data
         }
     })

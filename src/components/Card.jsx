@@ -39,7 +39,7 @@ const Card = ({ _id, universityName, universityImage, scholarshipCategory, locat
                     </p>
                 </div>
                 <div className="card-actions">
-                    <Link to={`/scolarship/${_id}`} className="btn h-10 min-h-10 bg-brand-primary hover:bg-brand-accent text-white rounded-lg border-0 px-6">Details</Link>
+                    <Link to={`/scholarship/${_id}`} className="btn h-10 min-h-10 bg-brand-primary hover:bg-brand-accent text-white rounded-lg border-0 px-6">Details</Link>
                 </div>
             </div>
         </div>

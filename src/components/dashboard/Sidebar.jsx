@@ -10,7 +10,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
     return (
         <aside
-            className={`fixed top-0 left-0 h-full bg-brand-primary text-white transition-all duration-300 ${isOpen ? "w-44 md:w-64" : "w-16"
+            className={`fixed z-50 top-0 left-0 h-full bg-brand-primary text-white transition-all duration-300 ${isOpen ? "w-44 md:w-64" : "w-16"
                 }`}
         >
             <div className="h-20 flex items-center justify-between px-4 border-b border-gray-700 ">
@@ -64,7 +64,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                     {isOpen && 'My Profile'}
                                 </NavLink>
                                 <NavLink
-                                    to="/dashboard/manage-scolarship"
+                                    to="/dashboard/manage-scholarship"
                                     className={`flex items-center ${isOpen ? '' : 'justify-center'} gap-4 py-2 px-4 hover:bg-gray-700 transition`}
                                 >
                                     <FaGraduationCap className="text-xl md:text-2xl" />
@@ -85,7 +85,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                     {isOpen && 'All Applied Scholarship'}
                                 </NavLink>
                                 <NavLink
-                                    to="/dashboard/add-scolarship"
+                                    to="/dashboard/add-scholarship"
                                     className={`flex items-center ${isOpen ? '' : 'justify-center'} gap-4 py-2 px-4 hover:bg-gray-700 transition`}
                                 >
                                     <FaPlus className="text-xl md:text-2xl" />
@@ -111,14 +111,14 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                                     {isOpen && 'Admin Profile'}
                                 </NavLink>
                                 <NavLink
-                                    to="/dashboard/add-scolarship"
+                                    to="/dashboard/add-scholarship"
                                     className={`flex items-center ${isOpen ? '' : 'justify-center'} gap-4 py-2 px-4 hover:bg-gray-700 transition`}
                                 >
                                     <FaPlus className="text-xl md:text-2xl" />
                                     {isOpen && 'Add Scholarship'}
                                 </NavLink>
                                 <NavLink
-                                    to="/dashboard/manage-scolarship"
+                                    to="/dashboard/manage-scholarship"
                                     className={`flex items-center ${isOpen ? '' : 'justify-center'} gap-4 py-2 px-4 hover:bg-gray-700 transition`}
                                 >
                                     <FaTasks className="text-xl md:text-2xl" />

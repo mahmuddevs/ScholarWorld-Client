@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
-import useScolarshipByID from "../../hooks/useScolarshipByID"
+import useScholarshipByID from "../../hooks/useScholarshipByID"
 import useAxios from "../../hooks/useAxios"
 import useAuth from "../../hooks/useAuth"
 import Title from "../../components/Title"
@@ -19,7 +19,7 @@ const Application = () => {
     const { user } = useAuth()
     const axiosBase = useAxios()
     const { id } = useParams()
-    const [scolarship, isLoading] = useScolarshipByID(id)
+    const [scholarship, isLoading] = useScholarshipByID(id)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const formRef = useRef()
     const navigate = useNavigate()
@@ -52,7 +52,7 @@ const Application = () => {
                             timer: 1500
                         });
                         reset()
-                        navigate(`/dashboard/user/my-applications`)
+                        navigate(`/dashboard/my-applications`)
                     }
                 }).catch((err) => {
                     Swal.fire({
@@ -67,9 +67,9 @@ const Application = () => {
     }
 
     const readOnlyData = {
-        universityName: scolarship.universityName,
-        scholarshipCategory: scolarship.scholarshipCategory,
-        subjectCategory: scolarship.subjectCategory
+        universityName: scholarship.universityName,
+        scholarshipCategory: scholarship.scholarshipCategory,
+        subjectCategory: scholarship.subjectCategory
     }
 
     return (

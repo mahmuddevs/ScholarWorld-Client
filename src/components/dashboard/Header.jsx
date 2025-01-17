@@ -35,7 +35,7 @@ const Header = () => {
 
     return (
         <header className="bg-brand-primary ">
-            <div className="w-11/12 md:container xl:w-9/12 mx-auto h-20 flex justify-between items-center text-white">
+            <div className="w-11/12 md:w-full mx-auto h-20 flex justify-between items-center text-white">
                 <nav className="flex gap-6 uppercase items-center ms-auto">
                     <motion.ul className={`uppercase flex flex-col lg:flex-row lg:items-center gap-6 font-extrabols fixed lg:static top-0 w-56 h-screen lg:h-auto lg:w-auto p-8 lg:p-0 bg-[#151515]/90 lg:bg-transparent z-50`}
                         initial={{ right: '-14rem' }}
@@ -47,7 +47,7 @@ const Header = () => {
                     <div className="flex items-center gap-4">
                         <div className="z-30 relative">
                             <div className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full" id="profile-pic">
+                                <div className="w-10 rounded-full bg-gray-500" id="profile-pic">
                                     <img
                                         alt={user?.displayName}
                                         src={user?.photoURL}
