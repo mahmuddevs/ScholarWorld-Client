@@ -1,16 +1,59 @@
+import useAxios from "../../../../hooks/useAxios"
+import useGetData from "../../../../hooks/useGetData"
 import UsersTable from "./UsersTable"
-
+import Swal from 'sweetalert2'
 
 const ManageUsers = () => {
-    const users = [
-        { id: 1, name: "John Doe", email: "john@example.com", role: "user" },
-        { id: 2, name: "Jane Smith", email: "jane@example.com", role: "moderator" },
-        { id: 3, name: "Admin User", email: "admin@example.com", role: "admin" },
-    ];
+    const [fetchedData, isLoading, refetch] = useGetData('/users/all-users')
+    const axiosBase = useAxios()
+
+    const handleChangeRole = (e, id) => {
+        const updatedRole = e.target.value
+        axiosBase.patch(`/users/${id}`, { userType: updatedRole })
+            .then((res) => {
+                if (res.data.modifiedCount) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `User Promoted to ${updatedRole}`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    refetch()
+                }
+            })
+    }
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosBase.delete(`/users/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                        refetch()
+                    })
+            }
+        });
+    }
+
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Users</h1>
-            <UsersTable users={users} />
+            <UsersTable users={fetchedData} loading={isLoading} handleDelete={handleDelete} handleChangeRole={handleChangeRole} />
         </div>
     )
 }

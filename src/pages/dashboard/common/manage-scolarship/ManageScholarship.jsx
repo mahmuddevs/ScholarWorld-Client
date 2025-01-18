@@ -64,11 +64,8 @@ const ManageScholarship = () => {
                     modalRef.current.close()
                     refetch()
                 }
-
             });
     };
-
-
 
     const handleDelete = (id) => {
         Swal.fire({
