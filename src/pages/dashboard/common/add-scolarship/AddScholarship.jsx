@@ -54,7 +54,6 @@ const AddScholarship = () => {
     };
     return (
         <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Add Scholarship</h1>
             <ScholarshipForm register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} reset={reset} />
         </div>
 

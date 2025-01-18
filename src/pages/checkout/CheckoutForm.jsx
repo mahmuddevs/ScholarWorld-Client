@@ -14,7 +14,7 @@ const CheckoutForm = () => {
     const { user } = useAuth()
     const axiosBase = useAxios()
     const { id } = useParams()
-    const [scholarship, isLoading] = useScholarshipByID(id)
+    const [scholarship] = useScholarshipByID(id)
     const navigate = useNavigate()
 
     const price = scholarship?.applicationFees

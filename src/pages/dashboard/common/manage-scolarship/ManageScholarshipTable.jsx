@@ -2,7 +2,7 @@ import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Spinner from "../../../../components/Spinner";
 
-const ManageScholarshipTable = ({ scholarships, loading, handleDelete }) => {
+const ManageScholarshipTable = ({ scholarships, loading, handleModal, handleDelete }) => {
     return (
         <div className="overflow-x-auto">
             {
@@ -38,7 +38,7 @@ const ManageScholarshipTable = ({ scholarships, loading, handleDelete }) => {
                                             >
                                                 <FaEye className="text-lg" />
                                             </Link>
-                                            <button className="btn btn-sm bg-brand-secondary text-white">
+                                            <button onClick={() => { handleModal(scholarship._id) }} className="btn btn-sm bg-brand-secondary text-white">
                                                 <FaEdit className="text-lg" />
                                             </button>
                                             <button onClick={() => { handleDelete(scholarship._id) }} className="btn btn-sm bg-red-600 text-white">

@@ -19,7 +19,7 @@ const Application = () => {
     const { user } = useAuth()
     const axiosBase = useAxios()
     const { id } = useParams()
-    const [scholarship, isLoading] = useScholarshipByID(id)
+    const [scholarship] = useScholarshipByID(id)
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
     const formRef = useRef()
     const navigate = useNavigate()
