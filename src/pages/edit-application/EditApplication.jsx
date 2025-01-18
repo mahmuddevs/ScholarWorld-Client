@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import useScholarshipByID from "../../hooks/useScholarshipByID"
 import useAxios from "../../hooks/useAxios"
@@ -7,15 +7,16 @@ import Title from "../../components/Title"
 import SectionTitle from "../../components/SectionTitle"
 import { useForm } from "react-hook-form"
 import axios from "axios"
-import ApplicationForm from "./ApplicationForm"
 import useUser from "../../hooks/useUser"
 import Swal from "sweetalert2"
+import EditApplicationForm from "./EditApplicationForm"
 
 const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
 const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 
 
-const Application = () => {
+const EditApplication = () => {
+    // const { user } = useAuth()
     const axiosBase = useAxios()
     const { id } = useParams()
     const [scholarship] = useScholarshipByID(id)
@@ -26,6 +27,7 @@ const Application = () => {
 
     const { _id, email, displayName } = userData
 
+    console.log(scholarship)
 
     const onSubmit = async (data) => {
         const img = { image: data.photo[0] }
@@ -79,9 +81,9 @@ const Application = () => {
                     heading='Scholarship Application Form'
                     subHeading='Please fill out all required fields accurately to ensure your application is processed promptly.' />
             </section>
-            <ApplicationForm register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} formRef={formRef} {...readOnlyData} />
+            <EditApplicationForm register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} formRef={formRef} {...readOnlyData} />
         </>
     )
 }
 
-export default Application
+export default EditApplication

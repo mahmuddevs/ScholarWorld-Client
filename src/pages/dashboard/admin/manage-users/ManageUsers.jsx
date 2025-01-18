@@ -15,7 +15,7 @@ const ManageUsers = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
-                        title: `User Promoted to ${updatedRole}`,
+                        title: `Role Changed to ${updatedRole}`,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -40,7 +40,7 @@ const ManageUsers = () => {
                         if (res.data.deletedCount) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "User has been deleted.",
                                 icon: "success"
                             });
                         }

@@ -1,4 +1,4 @@
-const ApplicationForm = ({ register, handleSubmit, errors, formRef, universityName, scholarshipCategory, subjectCategory }) => {
+const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universityName, scholarshipCategory, subjectCategory }) => {
     return (
         <div className="grid place-items-center">
             <div className="card bg-base-100 w-full max-w-4xl shrink-0 shadow-2xl mb-20">
@@ -196,4 +196,4 @@ const ApplicationForm = ({ register, handleSubmit, errors, formRef, universityNa
     )
 }
 
-export default ApplicationForm
+export default EditApplicationForm

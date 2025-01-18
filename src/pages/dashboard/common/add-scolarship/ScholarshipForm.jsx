@@ -162,7 +162,7 @@ const ScholarshipForm = ({ register, handleSubmit, errors, reset }) => {
                 </div>
                 <button
                     type="submit"
-                    className="btn bg-brand-primary hover:bg-brand-accent text-white w-full lg:col-span-2 mt-6"
+                    className="btn bg-brand-primary hover:bg-brand-accent text-white w-full lg:col-span-2"
                 >
                     Submit
                 </button>

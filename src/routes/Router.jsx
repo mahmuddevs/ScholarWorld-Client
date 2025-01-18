@@ -21,6 +21,7 @@ import MyReviews from "../pages/dashboard/user/my-reviews/MyReviews";
 import ScholarshipDetails from "../pages/scolarship-details/ScholarshipDetails";
 import AddScholarship from "../pages/dashboard/common/add-scolarship/AddScholarship";
 import ManageScholarship from "../pages/dashboard/common/manage-scolarship/ManageScholarship";
+import EditApplication from "../pages/edit-application/EditApplication";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: '/application/:id',
                 element: <Private><Application /></Private>
+            },
+            {
+                path: '/edit-application/:id',
+                element: <Private><EditApplication /></Private>
             }
         ]
 

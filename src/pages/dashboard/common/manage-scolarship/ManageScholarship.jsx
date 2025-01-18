@@ -83,7 +83,7 @@ const ManageScholarship = () => {
                         if (res.data.deletedCount) {
                             Swal.fire({
                                 title: "Deleted!",
-                                text: "Your file has been deleted.",
+                                text: "Scholarship has been deleted.",
                                 icon: "success"
                             });
                         }
@@ -99,7 +99,6 @@ const ManageScholarship = () => {
                 setSingleScholarship(res?.data)
                 modalRef.current.showModal()
             })
-        modalRef.current.showModal()
     }
 
     return (
