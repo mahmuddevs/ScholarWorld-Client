@@ -25,6 +25,7 @@ const Dashboard = () => {
         };
     }, []);
 
+
     const toggleSidebar = () => {
         setSidebarOpen((prev) => !prev);
     };

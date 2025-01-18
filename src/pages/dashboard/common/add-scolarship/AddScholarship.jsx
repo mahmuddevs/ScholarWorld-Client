@@ -19,6 +19,16 @@ const AddScholarship = () => {
     } = useForm();
 
     const onSubmit = async (data) => {
+        const { universityCity, universityCountry, ...restData } = data
+
+        const scolarshipData = {
+            ...restData,
+            location: {
+                country: universityCountry,
+                city: universityCity
+            }
+        }
+
         const img = { image: data.universityImage[0] }
         const res = await axios.post(hostingApi, img, {
             headers: {
@@ -27,7 +37,7 @@ const AddScholarship = () => {
         })
         const image = res?.data?.data?.display_url
         if (image) {
-            axiosBase.post('/scholarship/add', { ...data, universityImage: image, userEmail: user?.email })
+            axiosBase.post('/scholarship/add', { ...scolarshipData, universityImage: image, userEmail: user?.email })
                 .then((res) => {
                     if (res.data.acknowledged) {
                         Swal.fire({
@@ -37,6 +47,7 @@ const AddScholarship = () => {
                             showConfirmButton: false,
                             timer: 1500
                         });
+                        reset()
                     }
                 })
         }

@@ -19,7 +19,7 @@ const Header = () => {
                 <IoMdClose onClick={() => { setNavOpen(false) }} className="block lg:hidden cursor-pointer text-xl" />
             </li>
             <li>
-                <NavLink to='/scolarships'>All Scholarship</NavLink>
+                <NavLink to='/scholarships'>All Scholarship</NavLink>
             </li>
         </>
     )

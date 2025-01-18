@@ -31,7 +31,7 @@ const TopScholarships = () => {
                 </div>
             </div>
             <div className="mt-8 flex justify-center">
-                <Link to='/scolarships' className="btn rounded-xl border-0 bg-brand-primary hover:bg-brand-accent text-white px-8">All Scollarships</Link>
+                <Link to='/scholarships' className="btn rounded-xl border-0 bg-brand-primary hover:bg-brand-accent text-white px-8">All Scholarships</Link>
             </div>
         </section>
     )
