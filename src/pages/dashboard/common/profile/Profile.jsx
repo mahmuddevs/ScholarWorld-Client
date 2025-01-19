@@ -2,12 +2,12 @@ import useAuth from "../../../../hooks/useAuth";
 import useUser from "../../../../hooks/useUser";
 
 const Profile = () => {
-    const [userData, userLoading] = useUser()
+    const [userData] = useUser()
     const { user } = useAuth()
     const { displayName, email, userType } = userData
 
     return (
-        <div className="min-h-screen bg-brand-background flex items-center justify-center p-4">
+        <div className="min-h-[75vh] bg-brand-background flex items-center justify-center p-4">
             <div className="bg-white shadow-2xl rounded-3xl overflow-hidden max-w-4xl w-full">
                 <div className="md:flex">
                     <div className="md:w-1/3 bg-brand-primary p-8 flex flex-col items-center justify-center">

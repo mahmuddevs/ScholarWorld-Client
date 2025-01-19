@@ -2,12 +2,12 @@ import { FaBook, FaDollarSign, FaGraduationCap, FaStar } from "react-icons/fa6";
 import { FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const Card = ({ _id, universityName, universityImage, scholarshipCategory, location, applicationDeadline,
+const Card = ({ _id, scholarshipName, universityName, universityImage, scholarshipCategory, location, applicationDeadline,
     subjectCategory, applicationFees, rating
 }) => {
     return (
         <div className="card bg-[#f5faff] drop-shadow-xl">
-            <figure className="relative">
+            <figure className="relative h-60">
                 <img
                     src={universityImage}
                     alt={universityName + "logo"}
@@ -15,7 +15,8 @@ const Card = ({ _id, universityName, universityImage, scholarshipCategory, locat
                 <div className="badge rounded-md h-auto px-2 py-1 absolute top-4 right-4 bg-white/40 border-0"><FaStar className="mr-1 fill-orange-400" />{rating}/5</div>
             </figure>
             <div className="card-body p-4">
-                <h4 className="card-title text-xl font-bold mb-2">{universityName}</h4>
+                <h4 className="text-lg font-bold">{scholarshipName}</h4>
+                <h3 className="card-title text-xl font-bold mb-2">{universityName}</h3>
                 <div className="space-y-2 text-sm  mb-2">
                     <p className="flex items-center">
                         <FaGraduationCap className="mr-2 text-brand-primary" />

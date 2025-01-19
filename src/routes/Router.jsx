@@ -22,6 +22,9 @@ import ScholarshipDetails from "../pages/scolarship-details/ScholarshipDetails";
 import AddScholarship from "../pages/dashboard/common/add-scolarship/AddScholarship";
 import ManageScholarship from "../pages/dashboard/common/manage-scolarship/ManageScholarship";
 import EditApplication from "../pages/edit-application/EditApplication";
+import Admin from "./Admin";
+import Moderator from "./Moderator";
+import User from "./User";
 
 const router = createBrowserRouter([
     {
@@ -88,56 +91,45 @@ const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/my-profile',
-                element: <Profile />
+                element: <Private><Profile /></Private>
             },
             {
                 path: '/dashboard/my-applications',
-                element: <MyApplications />
+                element: <User><MyApplications /></User>
             },
             {
                 path: '/dashboard/my-reviews',
-                element: <MyReviews />
-            },
-            // moderator routes
-            {
-                path: 'dashboard/applied-scholarship',
-                element: <>all applied scolarships</>
+                element: <User><MyReviews /></User>
             },
             //admin routes
             {
                 path: '/dashboard/home',
-                element: <DashboardHome />
+                element: <Admin><DashboardHome /></Admin>
             },
             {
                 path: '/dashboard/admin-profile',
-                element: <Profile />
+                element: <Admin><Profile /></Admin>
             },
-            {
-                path: '/dashboard/manage-scholarship',
-                element: <ManageScholarship />
-            },
-
             {
                 path: '/dashboard/manage-users',
-                element: <ManageUsers />
+                element: <Admin><ManageUsers /></Admin>
             },
-            //common
+            //admin and moderator
             {
                 path: '/dashboard/add-scholarship',
-                element: <AddScholarship />
+                element: <Moderator><AddScholarship /></Moderator>
             },
             {
                 path: '/dashboard/manage-scholarship',
-                element: <ManageScholarship />
+                element: <Moderator><ManageScholarship /></Moderator>
             },
             {
                 path: '/dashboard/manage-applied-applications',
-                element: <ManageApplications />
+                element: <Moderator><ManageApplications /></Moderator>
             },
-            //profile for user and moderator
             {
                 path: '/dashboard/manage-review',
-                element: <ManageReview />
+                element: <Moderator><ManageReview /></Moderator>
             },
         ]
     }

@@ -7,11 +7,12 @@ import { Link, useParams } from 'react-router-dom';
 import useAxios from '../../hooks/useAxios';
 import Spinner from '../../components/Spinner';
 import moment from 'moment'
+import useGetData from '../../hooks/useGetData';
 
 const ScholarshipDetails = () => {
     const { id } = useParams()
     const axiosBase = useAxios()
-    const { data: scholarshipData = {}, isLoading } = useQuery({
+    const { data: scholarshipData = {}, isLoading: dataLoading } = useQuery({
         queryKey: ['single-scholarship', id],
         queryFn: async () => {
             const res = await axiosBase.get(`/scholarship/single/${id}`)
@@ -19,55 +20,57 @@ const ScholarshipDetails = () => {
         }
     })
 
-    const reviews = [
-        {
-            id: 1,
-            name: "John Doe",
-            image: "/placeholder.svg",
-            date: "2023-05-15",
-            rating: 4.5,
-            comment: "Great opportunity! The application process was smooth."
-        },
-        {
-            id: 2,
-            name: "Jane Smith",
-            image: "/placeholder.svg",
-            date: "2023-05-10",
-            rating: 5,
-            comment: "Excellent scholarship program. Highly recommended!"
-        },
-        {
-            id: 3,
-            name: "Bob Johnson",
-            image: "/placeholder.svg",
-            date: "2023-05-05",
-            rating: 4,
-            comment: "Good experience overall. Could improve communication."
-        },
-        {
-            id: 4,
-            name: "Bob Johnson",
-            image: "/placeholder.svg",
-            date: "2023-05-05",
-            rating: 4,
-            comment: "Good experience overall. Could improve communication."
-        },
-        {
-            id: 5,
-            name: "Bob Johnson",
-            image: "/placeholder.svg",
-            date: "2023-05-05",
-            rating: 4,
-            comment: "Good experience overall. Could improve communication."
-        }
-    ];
+    const [fetchedData, isLoading, refetch] = useGetData(`/reviews/get-reviews-by-scholarshipid/${id}`)
+
+    // const reviews = [
+    //     {
+    //         id: 1,
+    //         name: "John Doe",
+    //         image: "/placeholder.svg",
+    //         date: "2023-05-15",
+    //         rating: 4.5,
+    //         comment: "Great opportunity! The application process was smooth."
+    //     },
+    //     {
+    //         id: 2,
+    //         name: "Jane Smith",
+    //         image: "/placeholder.svg",
+    //         date: "2023-05-10",
+    //         rating: 5,
+    //         comment: "Excellent scholarship program. Highly recommended!"
+    //     },
+    //     {
+    //         id: 3,
+    //         name: "Bob Johnson",
+    //         image: "/placeholder.svg",
+    //         date: "2023-05-05",
+    //         rating: 4,
+    //         comment: "Good experience overall. Could improve communication."
+    //     },
+    //     {
+    //         id: 4,
+    //         name: "Bob Johnson",
+    //         image: "/placeholder.svg",
+    //         date: "2023-05-05",
+    //         rating: 4,
+    //         comment: "Good experience overall. Could improve communication."
+    //     },
+    //     {
+    //         id: 5,
+    //         name: "Bob Johnson",
+    //         image: "/placeholder.svg",
+    //         date: "2023-05-05",
+    //         rating: 4,
+    //         comment: "Good experience overall. Could improve communication."
+    //     }
+    // ];
 
     return (
         <>
             <div className="w-11/12 md:container xl:w-9/12 mx-auto pt-28 md:pt-36 mb-14 md:mb-24">
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                     {
-                        isLoading && <Spinner />
+                        dataLoading && <Spinner />
                     }
                     {
                         <div className="p-6">
@@ -126,25 +129,25 @@ const ScholarshipDetails = () => {
                             },
                         }}
                     >
-                        {reviews && reviews.length > 0 ? (
-                            reviews.map((review) => (
-                                <SwiperSlide key={review.id} className='pb-8'>
+                        {fetchedData && fetchedData.length > 0 ? (
+                            fetchedData.map((review) => (
+                                <SwiperSlide key={review._id} className='pb-8'>
                                     <div className="bg-white shadow-lg rounded-lg p-6 min-h-56 flex flex-col justify-between">
                                         <div className="flex items-center mb-4">
                                             <img
-                                                src={review.image || "/placeholder.svg"}
-                                                alt={review.name}
+                                                src={review.userPhoto}
+                                                alt={review.userName}
                                                 className="w-12 h-12 rounded-full mr-4"
                                             />
                                             <div>
-                                                <h3 className="font-semibold text-lg">{review.name}</h3>
-                                                <p className="text-sm text-gray-600">{review.date}</p>
+                                                <h3 className="font-semibold text-lg">{review.userName}</h3>
+                                                <p className="text-sm text-gray-600">{moment(review.reviewDate).format("YYYY-MM-DD")}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center mb-4">
                                             <ReactStars count={5} value={review.rating} size={24} edit={false} activeColor="#ffd700" />
                                         </div>
-                                        <p className="text-gray-700 flex-grow">{review.comment}</p>
+                                        <p className="text-gray-700 flex-grow">{review.review}</p>
                                     </div>
                                 </SwiperSlide>
 
