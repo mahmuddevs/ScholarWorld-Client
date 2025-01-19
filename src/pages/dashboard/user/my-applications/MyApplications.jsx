@@ -1,16 +1,77 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import useAxios from "../../../../hooks/useAxios";
 import useGetData from "../../../../hooks/useGetData";
 import ApplicationTable from "./ApplicationTable";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
+import AddReviewModal from "./AddReviewModal";
 
 const MyApplications = () => {
     const { user } = useAuth()
     const axiosBase = useAxios()
     const navigate = useNavigate()
+    const reviewModal = useRef()
+    const reviewForm = useRef()
     const [fetchedData, isLoading, refetch] = useGetData(`/application/my-applications/${user?.email}`)
+    const [application, setApplication] = useState({})
+
+    const [rating, setRating] = useState(0);
+    const [resetKey, setResetKey] = useState(0);
+
+    const handleRatingChange = (newRating) => {
+        setRating(newRating);
+    };
+
+    const resetForm = () => {
+        setRating(0);
+        setResetKey((prev) => prev + 1);
+        reviewForm.current.reset();
+        reviewModal.current.close();
+    };
+
+    const modalprops = { rating, resetKey, handleRatingChange, resetForm }
+
+
+    const handleReviewModal = (appliction) => {
+        reviewModal.current.showModal()
+        setApplication(appliction)
+    }
+
+    const handleReviewSubmit = (e, rating) => {
+        e.preventDefault()
+        const review = e.target.review.value
+        const userName = user?.displayName
+        const userEmail = user?.email
+        const userPhoto = user?.photoURL
+
+        const { scholarshipName, universityName, scholarshipID, subjectCategory } = application
+
+        const reviewData = { rating, review, scholarshipName, universityName, subjectCategory, scholarshipID, userPhoto, userName, userEmail }
+
+        axiosBase.post('/reviews/add-review', reviewData)
+            .then((res) => {
+                if (res.data.acknowledged) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Review Added Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                if (res.data.existing) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "warning",
+                        title: "Reviw Already Given",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                resetForm()
+            })
+    }
 
     const handleEdit = (id) => {
         axiosBase.get(`/application/single/${id}`)
@@ -55,11 +116,14 @@ const MyApplications = () => {
         });
     }
 
+
+
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Applications</h1>
+            <AddReviewModal reviewModal={reviewModal} reviewForm={reviewForm} reviewSubmit={handleReviewSubmit} {...modalprops} />
             <ApplicationTable applications={fetchedData} loading={isLoading}
-                handleDelete={handleDelete} handleEdit={handleEdit} />
+                handleDelete={handleDelete} handleEdit={handleEdit} reviewModal={handleReviewModal} />
         </div>
     );
 }

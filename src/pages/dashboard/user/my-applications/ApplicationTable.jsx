@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 import Spinner from "../../../../components/Spinner";
 
-const ApplicationTable = ({ applications, loading, handleDelete, handleEdit }) => {
+const ApplicationTable = ({ applications, loading, handleDelete, handleEdit, reviewModal }) => {
     return (
         <div className="overflow-x-auto">
             {
@@ -42,7 +42,7 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleEdit }) =
                                                     ? "badge-warning"
                                                     : application?.status === "processing"
                                                         ? "badge-info"
-                                                        : application?.status === "completed"
+                                                        : application?.status === "approved"
                                                             ? "badge-success"
                                                             : "badge-error"
                                                     }`}
@@ -63,7 +63,7 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleEdit }) =
                                             <button onClick={() => { handleDelete(application._id) }} className="btn btn-sm bg-red-600 text-white">
                                                 <FaTrash />
                                             </button>
-                                            <button className="btn btn-sm bg-accent text-white">
+                                            <button onClick={() => { reviewModal(application) }} className="btn btn-sm bg-accent text-white">
                                                 Add Review
                                             </button>
                                         </td>

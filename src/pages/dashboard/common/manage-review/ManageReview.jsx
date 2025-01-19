@@ -1,37 +1,42 @@
+import useAxios from "../../../../hooks/useAxios"
+import useGetData from "../../../../hooks/useGetData"
 import ReviewsTable from "./ReviewsTable"
+import Swal from "sweetalert2"
 
 const ManageReview = () => {
-    const reviews = [
-        {
-            id: 1,
-            universityName: "University A",
-            subjectCategory: "Engineering",
-            reviewerImage: "/path/to/image.jpg",
-            reviewerName: "John Doe",
-            reviewDate: "2025-01-01",
-            rating: 4,
-            comments: "Great university with amazing faculty!",
-        },
-        {
-            id: 2,
-            universityName: "University B",
-            subjectCategory: "Science",
-            reviewerImage: "/path/to/image2.jpg",
-            reviewerName: "Jane Smith",
-            reviewDate: "2025-01-15",
-            rating: 5,
-            comments: "Best experience, highly recommended!",
-        },
-    ];
+    const axiosBase = useAxios()
+    const [fetchedData, isLoading, refetch] = useGetData('/reviews')
 
-    // const handleDeleteReview = () => {
-
-    // }
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosBase.delete(`/reviews/delete-review/${id}`)
+                    .then((res) => {
+                        if (res.data.deletedCount) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your review has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                        refetch()
+                    });
+            }
+        })
+    }
 
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">All Reviews</h1>
-            <ReviewsTable reviews={reviews} />
+            <ReviewsTable reviews={fetchedData} loading={isLoading} handleDelete={handleDelete} />
         </div>
     )
 }

@@ -23,7 +23,7 @@ const UsersTable = ({ users, loading, handleDelete, handleChangeRole }) => {
                                 users?.map((user, index) => (
                                     <tr key={user._id} className="hover">
                                         <th>{index + 1}</th>
-                                        <td>{user?.name}</td>
+                                        <td>{user?.displayName}</td>
                                         <td>{user?.email}</td>
                                         <td>
                                             <select

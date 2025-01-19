@@ -62,6 +62,7 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef }) => {
                                 validate: (value) => value !== "" || "Please select an Option",
                             })}
                             className="select select-bordered"
+                            defaultValue=""
                         >
                             <option value="">
                                 Select Gender
@@ -83,6 +84,7 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef }) => {
                                 validate: (value) => value !== "" || "Please select an Option",
                             })}
                             className="select select-bordered"
+                            defaultValue=""
                         >
                             <option value="">
                                 Select Degree
@@ -102,9 +104,19 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef }) => {
                             type="text"
                             {...register("sscResult", {
                                 required: "SSC Result is required",
+                                min: {
+                                    value: 1,
+                                    message: "Must Be More Than 0",
+                                },
+                                max: {
+                                    value: 5,
+                                    message: "Max Value is 5",
+                                },
                             })}
                             placeholder="SSC Result (e.g., GPA)"
                             className="input input-bordered"
+                            min={1}
+                            max={5}
                         />
                         {errors.sscResult && <p className="text-red-500 text-sm font-semibold">{errors.sscResult.message}</p>}
                     </div>
@@ -117,9 +129,19 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef }) => {
                             type="text"
                             {...register("hscResult", {
                                 required: "HSC Result is required",
+                                min: {
+                                    value: 1,
+                                    message: "Must Be More Than 0",
+                                },
+                                max: {
+                                    value: 5,
+                                    message: "Max Value is 5",
+                                },
                             })}
                             placeholder="HSC Result (e.g., GPA)"
                             className="input input-bordered"
+                            min={1}
+                            max={5}
                         />
                         {errors.hscResult && <p className="text-red-500 text-sm font-semibold">{errors.hscResult.message}</p>}
                     </div>
@@ -131,6 +153,7 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef }) => {
                         <select
                             {...register("studyGap")}
                             className="select select-bordered"
+                            defaultValue=""
                         >
                             <option value="">
                                 Select Study Gap (if any)

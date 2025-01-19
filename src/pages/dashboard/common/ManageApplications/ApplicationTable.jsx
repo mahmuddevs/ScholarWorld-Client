@@ -31,7 +31,7 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleShowModal
                                     applications.map((application, index) => (
                                         <tr key={application._id} className="hover">
                                             <th>{index + 1}</th>
-                                            <td className="whitespace-nowrap">{application?.name}</td>
+                                            <td className="whitespace-nowrap">{application?.displayName}</td>
                                             <td className="whitespace-nowrap">{application?.universityName}</td>
                                             <td className="whitespace-nowrap">{application?.degree}</td>
                                             <td className="whitespace-nowrap">{application?.scholarshipCategory}</td>

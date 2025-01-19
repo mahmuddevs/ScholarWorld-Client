@@ -187,7 +187,7 @@ const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, rese
                             type="submit"
                             className="btn bg-brand-primary hover:bg-brand-accent text-white w-full lg:col-span-2"
                         >
-                            Submit
+                            Update
                         </button>
                     </form>
                 </div>
