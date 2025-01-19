@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, reset }) => {
+const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, reset, formRef }) => {
     useEffect(() => {
         if (scholarship) {
             reset({
@@ -10,7 +10,7 @@ const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, rese
                 universityRank: scholarship.universityRank,
                 degree: scholarship.degree,
                 scholarshipCategory: scholarship.scholarshipCategory,
-                tuitionFees: scholarship.tuitionFees,
+                serviceCharge: scholarship.serviceCharge,
                 applicationFees: scholarship.applicationFees,
                 applicationDeadline: scholarship.applicationDeadline,
                 subjectCategory: scholarship.subjectCategory,
@@ -19,13 +19,14 @@ const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, rese
             });
         }
     }, [scholarship, reset]);
+
     return (
         <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box w-11/12 mx-auto !max-w-4xl">
-                <h3 className="font-bold text-lg">Add Scholarship</h3>
-                <p className="py-4">Please fill in the details below</p>
+                <h3 className="font-bold text-lg">Update Scholarship</h3>
+                <p className="py-4">Maake Necessary Changes</p>
                 <div className="modal-action">
-                    <form onSubmit={handleSubmit} className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <form ref={formRef} onSubmit={handleSubmit} className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8">
                         {/* Left Column */}
                         <div>
                             <div className="mb-4">
@@ -134,10 +135,10 @@ const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, rese
                                     )}
                                 </div>
                                 <div className="mb-4">
-                                    <label className="block font-medium mb-2">Tuition Fees</label>
+                                    <label className="block font-medium mb-2">Service Charge</label>
                                     <input
                                         type="number"
-                                        {...register("tuitionFees")}
+                                        {...register("serviceCharge")}
                                         className="input input-bordered w-full"
                                     />
                                 </div>
@@ -191,7 +192,10 @@ const EditModal = ({ modalRef, scholarship, register, handleSubmit, errors, rese
                     </form>
                 </div>
                 <div className="modal-action block w-full">
-                    <button onClick={() => { modalRef.current.close() }} className="btn w-full">Close</button>
+                    <button onClick={() => {
+                        formRef.current.reset()
+                        modalRef.current.close()
+                    }} className="btn w-full">Close</button>
                 </div>
             </div>
 

@@ -13,6 +13,7 @@ const ManageScholarship = () => {
     const [fetchedData, isLoading, refetch] = useGetData('/scholarship')
     const [singleScholarship, setSingleScholarship] = useState({})
     const modalRef = useRef()
+    const formRef = useRef()
     const axiosBase = useAxios()
 
     const {
@@ -104,7 +105,7 @@ const ManageScholarship = () => {
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Scholarships</h1>
-            <EditModal modalRef={modalRef} scholarship={singleScholarship} register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} reset={reset} />
+            <EditModal modalRef={modalRef} scholarship={singleScholarship} register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} reset={reset} formRef={formRef} />
             <ManageScholarshipTable scholarships={fetchedData} loading={isLoading} handleDelete={handleDelete} handleModal={handleModal} />
         </div>
     )
