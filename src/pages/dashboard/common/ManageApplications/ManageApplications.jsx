@@ -81,12 +81,29 @@ const ManageApplications = () => {
         });
     }
 
+    const handleStatusChange = (e, id) => {
+        const status = e.target.value
+        axiosBase.patch(`/application/update/${id}`, { status })
+            .then((res) => {
+                if (res?.data.modifiedCount) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Status Updated",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+
+    }
+
     return (
         <div className="p-4">
             <h1 className="text-2xl font-bold mb-4">Applications</h1>
             <FeedbackModal feedbackRef={feedbackRef} id={details?._id} handleFeedbackSubmit={handleFeedbackSubmit} formRef={feedbackFormRef} />
             <ShowDetailsModal detailsRef={detailsRef} {...details} />
-            <ApplicationTable applications={fetchedData} loading={isLoading} handleDelete={handleDelete} handleShowModal={handleShowModal} handleFeedBack={handleFeedBack} />
+            <ApplicationTable applications={fetchedData} loading={isLoading} handleDelete={handleDelete} handleShowModal={handleShowModal} handleFeedBack={handleFeedBack} handleStatusChange={handleStatusChange} />
         </div>
     )
 }

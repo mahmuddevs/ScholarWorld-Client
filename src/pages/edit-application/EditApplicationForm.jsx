@@ -1,4 +1,7 @@
-const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universityName, scholarshipCategory, subjectCategory }) => {
+
+
+const EditApplicationForm = ({ register, handleSubmit, errors, formRef }) => {
+
     return (
         <div className="grid place-items-center">
             <div className="card bg-base-100 w-full max-w-4xl shrink-0 shadow-2xl mb-20">
@@ -30,7 +33,7 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                             name='photo'
                             type="file"
                             className="file-input file-input-bordered w-full"
-                            {...register("photo", { required: "Photo is Required" })}
+                            {...register("photo")}
                         />
                         {errors.photo && <p className="text-red-500 text-sm font-semibold">{errors.photo.message}</p>}
                     </div>
@@ -56,10 +59,11 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                         <select
                             {...register("gender", {
                                 required: "Gender is required",
+                                validate: (value) => value !== "" || "Please select an Option",
                             })}
                             className="select select-bordered"
                         >
-                            <option value="" disabled>
+                            <option value="">
                                 Select Gender
                             </option>
                             <option value="male">Male</option>
@@ -76,10 +80,11 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                         <select
                             {...register("degree", {
                                 required: "Applying degree is required",
+                                validate: (value) => value !== "" || "Please select an Option",
                             })}
                             className="select select-bordered"
                         >
-                            <option value="" disabled>
+                            <option value="">
                                 Select Degree
                             </option>
                             <option value="diploma">Diploma</option>
@@ -127,7 +132,7 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                             {...register("studyGap")}
                             className="select select-bordered"
                         >
-                            <option value="" disabled>
+                            <option value="">
                                 Select Study Gap (if any)
                             </option>
                             <option value="1 year">1 Year</option>
@@ -142,7 +147,6 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                         </label>
                         <input
                             type="text"
-                            value={universityName}
                             {...register("universityName")}
                             readOnly
                             className="input input-bordered"
@@ -155,7 +159,6 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                         <input
                             type="text"
                             {...register("scholarshipCategory")}
-                            value={scholarshipCategory}
                             readOnly
                             className="input input-bordered"
                         />
@@ -173,7 +176,6 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
                         <input
                             type="text"
                             {...register("subjectCategory")}
-                            value={subjectCategory}
                             readOnly
                             className="input input-bordered"
                         />
@@ -186,7 +188,7 @@ const EditApplicationForm = ({ register, handleSubmit, errors, formRef, universi
 
                     <div className="form-control mt-6 col-span-2">
                         <button type="submit" className="btn bg-brand-primary hover:bg-brand-accent text-white">
-                            Apply for Scholarship
+                            Update Appliction
                         </button>
                     </div>
                 </form>

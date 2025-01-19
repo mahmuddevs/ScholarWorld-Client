@@ -2,7 +2,7 @@ import { FaEye, FaComments, FaTrashAlt } from "react-icons/fa";
 import Spinner from "../../../../components/Spinner";
 import moment from 'moment'
 
-const ApplicationTable = ({ applications, loading, handleDelete, handleShowModal, handleFeedBack }) => {
+const ApplicationTable = ({ applications, loading, handleDelete, handleShowModal, handleFeedBack, handleStatusChange }) => {
     return (
         <div className="overflow-x-auto max-w-full">
             <div className="w-full">
@@ -40,18 +40,13 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleShowModal
                                             <td className="whitespace-nowrap">{application?.phone}</td>
                                             <td className="whitespace-nowrap">{moment(application.applyDate).format("YYYY-MM-DD")}</td>
                                             <td>
-                                                <span
-                                                    className={`badge ${application?.status === "pending"
-                                                        ? "badge-warning"
-                                                        : application?.status === "processing"
-                                                            ? "badge-info"
-                                                            : application?.status === "completed"
-                                                                ? "badge-success"
-                                                                : "badge-error"
-                                                        }`}
-                                                >
-                                                    {application?.status}
-                                                </span>
+                                                <select value={application?.status} onChange={(e) => { handleStatusChange(e, application._id) }} className="select select-bordered w-full max-w-xs">
+                                                    <option value="">Select Status</option>
+                                                    <option value="pending">Pending</option>
+                                                    <option value="processing">Processing</option>
+                                                    <option value="approved">Approved</option>
+                                                    <option value="canceled">Canceled</option>
+                                                </select>
                                             </td>
                                             <td>
                                                 <div className="flex gap-2 items-center justify-center">

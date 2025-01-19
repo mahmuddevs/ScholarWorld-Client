@@ -52,7 +52,7 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleEdit }) =
                                         </td>
                                         <td className="flex flex-wrap gap-2">
                                             <Link
-                                                to={`/scholarship/${application?.scolarshipID}`}
+                                                to={`/scholarship/${application?.scholarshipID}`}
                                                 className="btn btn-sm bg-brand-primary text-white"
                                             >
                                                 <FaEye />

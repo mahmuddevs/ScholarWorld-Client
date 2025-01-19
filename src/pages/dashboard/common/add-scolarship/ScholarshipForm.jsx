@@ -111,10 +111,10 @@ const ScholarshipForm = ({ register, handleSubmit, errors, reset }) => {
                             )}
                         </div>
                         <div className="mb-4">
-                            <label className="block font-medium mb-2">Tuition Fees</label>
+                            <label className="block font-medium mb-2">Service Charge</label>
                             <input
                                 type="number"
-                                {...register("tuitionFees")}
+                                {...register("serviceCharge")}
                                 className="input input-bordered w-full"
                             />
                         </div>

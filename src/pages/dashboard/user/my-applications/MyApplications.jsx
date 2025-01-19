@@ -19,7 +19,7 @@ const MyApplications = () => {
                     Swal.fire({
                         position: "top-end",
                         icon: "warning",
-                        title: "Can't edit.  Edit the application is processing.",
+                        title: "Can't edit. Edit the application is processing.",
                         showConfirmButton: false,
                         timer: 1500
                     }); s
