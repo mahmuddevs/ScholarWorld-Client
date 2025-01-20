@@ -1,17 +1,17 @@
 import axios from "axios";
 import useAuth from "../../../../hooks/useAuth";
-import useAxios from "../../../../hooks/useAxios";
 import ScholarshipForm from "./ScholarshipForm"
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2'
 import Title from "../../../../components/Title";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 
 const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
 const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 const AddScholarship = () => {
     const { user } = useAuth()
-    const axiosBase = useAxios()
+    const axiosSecure = useAxiosSecure()
     const {
         register,
         handleSubmit,
@@ -38,7 +38,7 @@ const AddScholarship = () => {
         })
         const image = res?.data?.data?.display_url
         if (image) {
-            axiosBase.post('/scholarship/add', { ...scolarshipData, universityImage: image, userEmail: user?.email })
+            axiosSecure.post('/scholarship/add', { ...scolarshipData, universityImage: image, userEmail: user?.email })
                 .then((res) => {
                     if (res.data.acknowledged) {
                         Swal.fire({

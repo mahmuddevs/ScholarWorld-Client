@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import useAuth from './useAuth'
 
 const instance = axios.create({
-    baseURL: 'http://localhost:3000'
-    // baseURL: 'https://scholar-world.vercel.app'
+    // baseURL: 'http://localhost:3000'
+    baseURL: 'https://scholar-world.vercel.app'
 })
 
 const useAxiosSecure = () => {

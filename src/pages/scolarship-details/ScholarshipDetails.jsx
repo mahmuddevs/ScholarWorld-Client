@@ -23,49 +23,6 @@ const ScholarshipDetails = () => {
 
     const [fetchedData, isLoading, refetch] = useGetData(`/reviews/get-reviews-by-scholarshipid/${id}`)
 
-    // const reviews = [
-    //     {
-    //         id: 1,
-    //         name: "John Doe",
-    //         image: "/placeholder.svg",
-    //         date: "2023-05-15",
-    //         rating: 4.5,
-    //         comment: "Great opportunity! The application process was smooth."
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Jane Smith",
-    //         image: "/placeholder.svg",
-    //         date: "2023-05-10",
-    //         rating: 5,
-    //         comment: "Excellent scholarship program. Highly recommended!"
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "Bob Johnson",
-    //         image: "/placeholder.svg",
-    //         date: "2023-05-05",
-    //         rating: 4,
-    //         comment: "Good experience overall. Could improve communication."
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "Bob Johnson",
-    //         image: "/placeholder.svg",
-    //         date: "2023-05-05",
-    //         rating: 4,
-    //         comment: "Good experience overall. Could improve communication."
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "Bob Johnson",
-    //         image: "/placeholder.svg",
-    //         date: "2023-05-05",
-    //         rating: 4,
-    //         comment: "Good experience overall. Could improve communication."
-    //     }
-    // ];
-
     return (
         <>
             <Title title={scholarshipData?.scholarshipName} />
@@ -98,10 +55,6 @@ const ScholarshipDetails = () => {
                                     <p className="text-lg"><strong>Service Charge:</strong> {scholarshipData?.serviceCharge || 'N/A'}</p>
                                     <p className="text-lg"><strong>Application Fees:</strong> {scholarshipData?.applicationFees}</p>
                                 </div>
-                            </div>
-                            <div className="mt-6">
-                                <h2 className="text-2xl font-semibold mb-2">Description</h2>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore fugit deleniti minus reiciendis, in magnam officia nulla rem dolorem nemo. Beatae sequi voluptatem cum nisi, voluptates corrupti consectetur consequatur dolor?</p>
                             </div>
                             <div className="mt-6">
                                 <Link to={`/checkout/${scholarshipData._id}`} className="bg-brand-primary text-white font-bold py-2 px-4 rounded hover:bg-brand-accent transition duration-300">

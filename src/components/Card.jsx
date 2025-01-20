@@ -43,7 +43,7 @@ const Card = ({ _id, averageRating, scholarshipName, universityName, universityI
                         <span><strong>Fees:</strong> ${applicationFees}</span>
                     </p>
                 </div>
-                <div className="card-actions">
+                <div className="card-actions mt-auto">
                     <Link to={`/scholarship/${_id}`} className="btn h-10 min-h-10 bg-brand-primary hover:bg-brand-accent text-white rounded-lg border-0 px-6">Details</Link>
                 </div>
             </div>
