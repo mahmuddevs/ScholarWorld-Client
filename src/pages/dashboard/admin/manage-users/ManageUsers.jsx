@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Title from "../../../../components/Title"
 import useAxiosSecure from "../../../../hooks/useAxiosSecure"
 import useGetData from "../../../../hooks/useGetData"
@@ -5,7 +6,8 @@ import UsersTable from "./UsersTable"
 import Swal from 'sweetalert2'
 
 const ManageUsers = () => {
-    const [fetchedData, isLoading, refetch] = useGetData('/users/all-users')
+    const [role, setRole] = useState('')
+    const [fetchedData, isLoading, refetch] = useGetData(`/users/all-users?role=${role}`)
     const axiosSecure = useAxiosSecure()
 
     const handleChangeRole = (e, id) => {
@@ -51,10 +53,24 @@ const ManageUsers = () => {
         });
     }
 
+    const handleFetchByRole = (e) => {
+        const role = e.target.value
+        setRole(role)
+        refetch
+    }
+
     return (
         <div className="p-4">
             <Title title="Manage Users" />
             <h1 className="text-2xl font-bold mb-4">Users</h1>
+            <div className="flex justify-end gap-4">
+                <select onChange={handleFetchByRole} defaultValue="" className="select select-bordered w-full max-w-xs">
+                    <option value="">Sort By Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="moderator">Moderator</option>
+                    <option value="user">User</option>
+                </select>
+            </div>
             <UsersTable users={fetchedData} loading={isLoading} handleDelete={handleDelete} handleChangeRole={handleChangeRole} />
         </div>
     )

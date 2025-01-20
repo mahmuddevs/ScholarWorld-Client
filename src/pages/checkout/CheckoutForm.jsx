@@ -70,7 +70,6 @@ const CheckoutForm = () => {
 
                 axiosBase.post('/stripe/save-transaction', payment)
                     .then(res => {
-                        console.log(res.data)
                         if (res.data.acknowledged) {
                             Swal.fire({
                                 position: "top-end",

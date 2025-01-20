@@ -22,6 +22,7 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleShowModal
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Apply Date</th>
+                                    <th>Deadline</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -39,6 +40,7 @@ const ApplicationTable = ({ applications, loading, handleDelete, handleShowModal
                                             <td className="whitespace-nowrap">{application?.email}</td>
                                             <td className="whitespace-nowrap">{application?.phone}</td>
                                             <td className="whitespace-nowrap">{moment(application.applyDate).format("YYYY-MM-DD")}</td>
+                                            <td className="whitespace-nowrap">{moment(application.applicationDeadline).format("YYYY-MM-DD")}</td>
                                             <td>
                                                 <select value={application?.status} onChange={(e) => { handleStatusChange(e, application._id) }} className="select select-bordered w-full max-w-xs">
                                                     <option value="">Select Status</option>

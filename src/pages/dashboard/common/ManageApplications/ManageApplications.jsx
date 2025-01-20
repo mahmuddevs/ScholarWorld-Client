@@ -8,13 +8,16 @@ import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Title from "../../../../components/Title";
 
 const ManageApplications = () => {
-    const [fetchedData, isLoading, refetch] = useGetData('/application/all-applications')
+    const [deadline, setDeadline] = useState(0)
+    const [applied, setApplied] = useState(0)
+
+    const [fetchedData, isLoading, refetch] = useGetData(`/application/all-applications?deadline=${deadline}&applied=${applied}`)
+
     const [details, setDetails] = useState({})
     const detailsRef = useRef()
     const feedbackRef = useRef()
     const feedbackFormRef = useRef()
     const axiosSecure = useAxiosSecure()
-
 
     const handleFeedbackSubmit = (e, id) => {
         e.preventDefault()
@@ -100,12 +103,38 @@ const ManageApplications = () => {
 
     }
 
+    const handleDeadline = (e) => {
+        const value = e.target.value
+        setDeadline(value)
+        refetch()
+    }
+    const handleApplied = (e) => {
+        const value = e.target.value
+        setApplied(value)
+        refetch()
+    }
+
+
+    console.log(deadline, applied)
+
     return (
         <div className="p-4">
             <Title title="Manage Applications" />
             <h1 className="text-2xl font-bold mb-4">Applications</h1>
             <FeedbackModal feedbackRef={feedbackRef} id={details?._id} handleFeedbackSubmit={handleFeedbackSubmit} formRef={feedbackFormRef} />
             <ShowDetailsModal detailsRef={detailsRef} {...details} />
+            <div className="flex justify-end gap-4">
+                <select onChange={handleDeadline} defaultValue="" className="select select-bordered w-full max-w-xs">
+                    <option disabled value="">Sort By Deadline</option>
+                    <option value="1">Low to High</option>
+                    <option value="-1">High to Low</option>
+                </select>
+                <select onChange={handleApplied} defaultValue="" className="select select-bordered w-full max-w-xs">
+                    <option disabled value="">Sort By Applied Date</option>
+                    <option value="1">Low to High</option>
+                    <option value="-1">High to Low</option>
+                </select>
+            </div>
             <ApplicationTable applications={fetchedData} loading={isLoading} handleDelete={handleDelete} handleShowModal={handleShowModal} handleFeedBack={handleFeedBack} handleStatusChange={handleStatusChange} />
         </div>
     )

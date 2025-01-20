@@ -36,13 +36,12 @@ const Application = () => {
         })
         const image = res?.data?.data?.display_url
 
-        const applicationData = { ...data, photo: image, userID: _id, email, displayName, scolarshipID: id }
+        const applicationData = { ...data, photo: image, userID: _id, email, displayName, scolarshipID: id, applicationDeadline: scholarship.applicationDeadline }
 
         if (image) {
             axiosBase.post('/application/add', applicationData)
                 .then(res => {
                     if (res.data) {
-                        console.log(res.data.acknowledged)
                         Swal.fire({
                             position: "top-end",
                             icon: "success",
@@ -68,7 +67,7 @@ const Application = () => {
     const readOnlyData = {
         universityName: scholarship.universityName,
         scholarshipCategory: scholarship.scholarshipCategory,
-        subjectCategory: scholarship.subjectCategory
+        subjectCategory: scholarship.subjectCategory,
     }
 
     return (
