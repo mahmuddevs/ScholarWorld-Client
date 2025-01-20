@@ -1,15 +1,15 @@
-import useAxios from "../../../../hooks/useAxios"
+import useAxiosSecure from "../../../../hooks/useAxiosSecure"
 import useGetData from "../../../../hooks/useGetData"
 import UsersTable from "./UsersTable"
 import Swal from 'sweetalert2'
 
 const ManageUsers = () => {
     const [fetchedData, isLoading, refetch] = useGetData('/users/all-users')
-    const axiosBase = useAxios()
+    const axiosSecure = useAxiosSecure()
 
     const handleChangeRole = (e, id) => {
         const updatedRole = e.target.value
-        axiosBase.patch(`/users/${id}`, { userType: updatedRole })
+        axiosSecure.patch(`/users/${id}`, { userType: updatedRole })
             .then((res) => {
                 if (res.data.modifiedCount) {
                     Swal.fire({
@@ -35,7 +35,7 @@ const ManageUsers = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosBase.delete(`/users/${id}`)
+                axiosSecure.delete(`/users/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({

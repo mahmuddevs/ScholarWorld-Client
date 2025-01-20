@@ -1,10 +1,10 @@
 import ApplicationTable from "./ApplicationTable";
 import useGetData from "../../../../hooks/useGetData";
 import Swal from 'sweetalert2'
-import useAxios from "../../../../hooks/useAxios";
 import { useRef, useState } from "react";
 import ShowDetailsModal from "./ShowDetailsModal";
 import FeedbackModal from "./FeedbackModal";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const ManageApplications = () => {
     const [fetchedData, isLoading, refetch] = useGetData('/application/all-applications')
@@ -12,13 +12,13 @@ const ManageApplications = () => {
     const detailsRef = useRef()
     const feedbackRef = useRef()
     const feedbackFormRef = useRef()
-    const axiosBase = useAxios()
+    const axiosSecure = useAxiosSecure()
 
 
     const handleFeedbackSubmit = (e, id) => {
         e.preventDefault()
         const value = e.target.feedback.value
-        axiosBase.patch(`/application/update/${id}`, { feedback: value })
+        axiosSecure.patch(`/application/update/${id}`, { feedback: value })
             .then((res) => {
                 if (res.data.modifiedCount) {
                     Swal.fire({
@@ -35,7 +35,7 @@ const ManageApplications = () => {
             })
     }
     const handleFeedBack = (id) => {
-        axiosBase.get(`/application/single/${id}`)
+        axiosSecure.get(`/application/single/${id}`)
             .then((res) => {
                 if (res?.data) {
                     setDetails(res?.data)
@@ -46,7 +46,7 @@ const ManageApplications = () => {
     }
 
     const handleShowModal = (id) => {
-        axiosBase.get(`/application/single/${id}`)
+        axiosSecure.get(`/application/single/${id}`)
             .then((res) => {
                 if (res?.data) {
                     setDetails(res?.data)
@@ -66,7 +66,7 @@ const ManageApplications = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosBase.delete(`/application/single/${id}`)
+                axiosSecure.delete(`/application/single/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
@@ -83,7 +83,7 @@ const ManageApplications = () => {
 
     const handleStatusChange = (e, id) => {
         const status = e.target.value
-        axiosBase.patch(`/application/update/${id}`, { status })
+        axiosSecure.patch(`/application/update/${id}`, { status })
             .then((res) => {
                 if (res?.data.modifiedCount) {
                     Swal.fire({

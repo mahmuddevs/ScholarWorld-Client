@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import useAxios from "../../../../hooks/useAxios";
 import useGetData from "../../../../hooks/useGetData";
 import ManageScholarshipTable from "./ManageScholarshipTable";
 import Swal from 'sweetalert2'
 import EditModal from "./EditModal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
 const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 const ManageScholarship = () => {
-    const [fetchedData, isLoading, refetch] = useGetData('/scholarship')
+    const [fetchedData, isLoading, refetch] = useGetData('/scholarship/base-scholarships')
     const [singleScholarship, setSingleScholarship] = useState({})
     const modalRef = useRef()
     const formRef = useRef()
-    const axiosBase = useAxios()
+    const axiosSecure = useAxiosSecure()
 
     const {
         register,
@@ -52,7 +52,7 @@ const ManageScholarship = () => {
 
         const updateData = image ? { ...scholarshipData, universityImage: image } : scholarshipData;
 
-        axiosBase.patch(`/scholarship/update/${singleScholarship?._id}`, updateData)
+        axiosSecure.patch(`/scholarship/update/${singleScholarship?._id}`, updateData)
             .then((res) => {
                 if (res.data.modifiedCount) {
                     Swal.fire({
@@ -79,7 +79,7 @@ const ManageScholarship = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosBase.delete(`/scholarship/single/${id}`)
+                axiosSecure.delete(`/scholarship/single/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
@@ -95,7 +95,7 @@ const ManageScholarship = () => {
     }
 
     const handleModal = (id) => {
-        axiosBase.get(`/scholarship/single/${id}`)
+        axiosSecure.get(`/scholarship/single/${id}`)
             .then((res) => {
                 setSingleScholarship(res?.data)
                 modalRef.current.showModal()

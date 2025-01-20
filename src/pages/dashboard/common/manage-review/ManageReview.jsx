@@ -1,10 +1,10 @@
-import useAxios from "../../../../hooks/useAxios"
+import useAxiosSecure from "../../../../hooks/useAxiosSecure"
 import useGetData from "../../../../hooks/useGetData"
 import ReviewsTable from "./ReviewsTable"
 import Swal from "sweetalert2"
 
 const ManageReview = () => {
-    const axiosBase = useAxios()
+    const axiosSecure = useAxiosSecure()
     const [fetchedData, isLoading, refetch] = useGetData('/reviews')
 
     const handleDelete = (id) => {
@@ -18,7 +18,7 @@ const ManageReview = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosBase.delete(`/reviews/delete-review/${id}`)
+                axiosSecure.delete(`/reviews/delete-review/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
