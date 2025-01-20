@@ -1,3 +1,4 @@
+import Title from "../../../../components/Title"
 import useAxiosSecure from "../../../../hooks/useAxiosSecure"
 import useGetData from "../../../../hooks/useGetData"
 import ReviewsTable from "./ReviewsTable"
@@ -35,6 +36,7 @@ const ManageReview = () => {
 
     return (
         <div className="p-4">
+            <Title title="Manage Reviews" />
             <h1 className="text-2xl font-bold mb-4">All Reviews</h1>
             <ReviewsTable reviews={fetchedData} loading={isLoading} handleDelete={handleDelete} />
         </div>

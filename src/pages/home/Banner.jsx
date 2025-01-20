@@ -46,7 +46,7 @@ const Banner = () => {
                                 <div className='text-center bg-black/30 p-6 md:p-16 space-y-1.5 md:space-y-4'>
                                     <h1 className='text-2xl md:text-4xl font-bold drop-shadow-lg w-10/12 mx-auto'>{slide.title}</h1>
                                     <p className='text-sm md:text-lg font-medium w-full sm:w-9/12 mx-auto drop-shadow-lg'>{slide.description}</p>
-                                    <button className='btn bg-brand-primary hover:bg-brand-accent border-0 text-white'>Apply Now</button>
+                                    <a href='#top-scholarships' className='btn bg-brand-primary hover:bg-brand-accent border-0 text-white'>Apply Now</a>
                                 </div>
                             </div>
                         </SwiperSlide>

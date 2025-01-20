@@ -15,7 +15,7 @@ const TopScholarships = () => {
         }
     })
     return (
-        <section className="w-11/12 md:container xl:w-9/12 mx-auto mb-14 lg:mb-24">
+        <section id="top-scholarships" className="w-11/12 md:container xl:w-9/12 mx-auto mb-14 lg:mb-24">
             <SectionTitle
                 heading="Top Scholarships for You"
                 subHeading="Find the best scholarships to study at leading universities worldwide."

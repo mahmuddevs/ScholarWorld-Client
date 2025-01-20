@@ -1,15 +1,16 @@
 import { useRef, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
-import useAxios from "../../../../hooks/useAxios";
 import useGetData from "../../../../hooks/useGetData";
 import ApplicationTable from "./ApplicationTable";
 import Swal from 'sweetalert2'
 import { useNavigate } from "react-router-dom";
 import AddReviewModal from "./AddReviewModal";
+import Title from "../../../../components/Title";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 const MyApplications = () => {
     const { user } = useAuth()
-    const axiosBase = useAxios()
+    const axiosSecure = useAxiosSecure()
     const navigate = useNavigate()
     const reviewModal = useRef()
     const reviewForm = useRef()
@@ -49,7 +50,7 @@ const MyApplications = () => {
 
         const reviewData = { rating, review, scholarshipName, universityName, subjectCategory, scholarshipID, userPhoto, userName, userEmail }
 
-        axiosBase.post('/reviews/add-review', reviewData)
+        axiosSecure.post('/reviews/add-review', reviewData)
             .then((res) => {
                 if (res.data.acknowledged) {
                     Swal.fire({
@@ -74,7 +75,7 @@ const MyApplications = () => {
     }
 
     const handleEdit = (id) => {
-        axiosBase.get(`/application/single/${id}`)
+        axiosSecure.get(`/application/single/${id}`)
             .then((res) => {
                 if (res.data.status !== 'pending') {
                     Swal.fire({
@@ -101,7 +102,7 @@ const MyApplications = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosBase.delete(`/application/single/${id}`)
+                axiosSecure.delete(`/application/single/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
@@ -120,6 +121,7 @@ const MyApplications = () => {
 
     return (
         <div className="p-4">
+            <Title title="My Applications" />
             <h1 className="text-2xl font-bold mb-4">Applications</h1>
             <AddReviewModal reviewModal={reviewModal} reviewForm={reviewForm} reviewSubmit={handleReviewSubmit} {...modalprops} />
             <ApplicationTable applications={fetchedData} loading={isLoading}

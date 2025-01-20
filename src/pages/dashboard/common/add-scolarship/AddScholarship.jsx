@@ -4,6 +4,7 @@ import useAxios from "../../../../hooks/useAxios";
 import ScholarshipForm from "./ScholarshipForm"
 import { useForm } from "react-hook-form";
 import Swal from 'sweetalert2'
+import Title from "../../../../components/Title";
 
 
 const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
@@ -54,6 +55,7 @@ const AddScholarship = () => {
     };
     return (
         <div className="p-4">
+            <Title title="Add Scholrship" />
             <ScholarshipForm register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} reset={reset} />
         </div>
 

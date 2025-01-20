@@ -5,6 +5,7 @@ import { useRef, useState } from "react";
 import ShowDetailsModal from "./ShowDetailsModal";
 import FeedbackModal from "./FeedbackModal";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Title from "../../../../components/Title";
 
 const ManageApplications = () => {
     const [fetchedData, isLoading, refetch] = useGetData('/application/all-applications')
@@ -94,12 +95,14 @@ const ManageApplications = () => {
                         timer: 1500
                     });
                 }
+                refetch()
             })
 
     }
 
     return (
         <div className="p-4">
+            <Title title="Manage Applications" />
             <h1 className="text-2xl font-bold mb-4">Applications</h1>
             <FeedbackModal feedbackRef={feedbackRef} id={details?._id} handleFeedbackSubmit={handleFeedbackSubmit} formRef={feedbackFormRef} />
             <ShowDetailsModal detailsRef={detailsRef} {...details} />

@@ -5,16 +5,18 @@ import useGetData from "../../../../hooks/useGetData"
 import EditReviewModal from "./EditReviewModal"
 import ReviewTable from "./ReviewTable"
 import Swal from "sweetalert2"
+import Title from "../../../../components/Title"
+import useAxiosSecure from "../../../../hooks/useAxiosSecure"
 
 const MyReviews = () => {
     const { user } = useAuth();
-    const axiosBase = useAxios();
     const [fetchedData, isLoading, refetch] = useGetData(`/reviews/get-reviews/${user?.email}`);
     const [review, setReview] = useState({});
     const reviewModal = useRef();
     const reviewForm = useRef();
     const [rating, setRating] = useState(0);
     const [resetKey, setResetKey] = useState(0);
+    const axiosSecure = useAxiosSecure()
 
     const handleRatingChange = (newRating) => {
         setRating(newRating);
@@ -40,7 +42,7 @@ const MyReviews = () => {
         e.preventDefault()
         const reviewComment = e.target.review.value
 
-        axiosBase.patch(`/reviews/update-review/${review?._id}`, { review: reviewComment, rating })
+        axiosSecure.patch(`/reviews/update-review/${review?._id}`, { review: reviewComment, rating })
             .then((res) => {
                 if (res.data.modifiedCount) {
                     Swal.fire({
@@ -67,7 +69,7 @@ const MyReviews = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosBase.delete(`/reviews/delete-review/${id}`)
+                axiosSecure.delete(`/reviews/delete-review/${id}`)
                     .then((res) => {
                         if (res.data.deletedCount) {
                             Swal.fire({
@@ -84,6 +86,7 @@ const MyReviews = () => {
 
     return (
         <div className="p-4">
+            <Title title="My Reviews" />
             <h1 className="text-2xl font-bold mb-4">My Reviews</h1>
             <EditReviewModal reviewModal={reviewModal} reviewForm={reviewForm} reviewSubmit={handleReviewSubmit} {...modalprops} />
             <ReviewTable reviews={fetchedData} loading={isLoading} handleDelete={handleDelete} handleReview={handleReviewModal} />

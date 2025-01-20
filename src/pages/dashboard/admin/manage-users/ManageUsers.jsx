@@ -1,3 +1,4 @@
+import Title from "../../../../components/Title"
 import useAxiosSecure from "../../../../hooks/useAxiosSecure"
 import useGetData from "../../../../hooks/useGetData"
 import UsersTable from "./UsersTable"
@@ -52,6 +53,7 @@ const ManageUsers = () => {
 
     return (
         <div className="p-4">
+            <Title title="Manage Users" />
             <h1 className="text-2xl font-bold mb-4">Users</h1>
             <UsersTable users={fetchedData} loading={isLoading} handleDelete={handleDelete} handleChangeRole={handleChangeRole} />
         </div>

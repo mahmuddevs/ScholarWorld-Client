@@ -6,6 +6,7 @@ import EditModal from "./EditModal";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
+import Title from "../../../../components/Title";
 
 const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
 const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
@@ -104,6 +105,7 @@ const ManageScholarship = () => {
 
     return (
         <div className="p-4">
+            <Title title="Mange Scholarships" />
             <h1 className="text-2xl font-bold mb-4">Scholarships</h1>
             <EditModal modalRef={modalRef} scholarship={singleScholarship} register={register} handleSubmit={handleSubmit(onSubmit)} errors={errors} reset={reset} formRef={formRef} />
             <ManageScholarshipTable scholarships={fetchedData} loading={isLoading} handleDelete={handleDelete} handleModal={handleModal} />

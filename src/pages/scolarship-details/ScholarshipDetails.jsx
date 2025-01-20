@@ -8,6 +8,7 @@ import useAxios from '../../hooks/useAxios';
 import Spinner from '../../components/Spinner';
 import moment from 'moment'
 import useGetData from '../../hooks/useGetData';
+import Title from '../../components/Title';
 
 const ScholarshipDetails = () => {
     const { id } = useParams()
@@ -67,6 +68,7 @@ const ScholarshipDetails = () => {
 
     return (
         <>
+            <Title title={scholarshipData?.scholarshipName} />
             <div className="w-11/12 md:container xl:w-9/12 mx-auto pt-28 md:pt-36 mb-14 md:mb-24">
                 <div className="bg-white shadow-lg rounded-lg overflow-hidden">
                     {
@@ -84,6 +86,7 @@ const ScholarshipDetails = () => {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
+                                    <p className="text-lg"><strong>Scholarship Name:</strong> {scholarshipData?.scholarshipName}</p>
                                     <p className="text-lg"><strong>Category:</strong> {scholarshipData?.scholarshipCategory}</p>
                                     <p className="text-lg"><strong>Location:</strong> {scholarshipData?.location?.city},  {scholarshipData?.location?.country}</p>
                                     <p className="text-lg"><strong>Application Deadline:</strong> {scholarshipData?.applicationDeadline}</p>
