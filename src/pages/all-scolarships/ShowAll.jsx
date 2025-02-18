@@ -33,7 +33,7 @@ const ShowAll = () => {
             </section>
             <section className="w-11/12 md:container xl:w-9/12 mx-auto">
                 {isLoading && <Spinner />}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full md:w-10/12 mx-auto gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4 w-full mx-auto gap-6">
                     {
                         scolarshipData?.map((scholarship) => {
                             return <Card key={scholarship._id} {...scholarship} />

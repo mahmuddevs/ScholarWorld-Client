@@ -20,7 +20,7 @@ const NewsLetter = () => {
 
     }
     return (
-        <section className="bg-slate-300 mb-14 lg:mb-24">
+        <section className="bg-slate-300">
             <div className="w-11/12 md:container xl:w-9/12 mx-auto py-14 lg:py-24 text-center">
                 <h2 className="text-3xl md:text-4xl font-bold text-brand-text">
                     Stay Updated!

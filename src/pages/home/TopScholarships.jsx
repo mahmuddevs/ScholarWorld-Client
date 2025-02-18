@@ -22,7 +22,7 @@ const TopScholarships = () => {
             />
             <div>
                 {isLoading && <Spinner />}
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 w-full md:w-10/12 mx-auto gap-6">
+                <div className="grid sm:grid-cols-2 lg:grid-cols-4  w-full mx-auto gap-6">
                     {
                         scholarships?.map((scholarship) => {
                             return <Card key={scholarship._id} {...scholarship} />
