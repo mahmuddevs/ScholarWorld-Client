@@ -36,6 +36,7 @@ const Banner = () => {
                     delay: 5000,
                     disableOnInteraction: false,
                 }}
+                speed={2000}
                 className="mySwiper">
                 {
                     data?.map((slide, index) => {

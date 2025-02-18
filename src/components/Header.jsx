@@ -43,9 +43,9 @@ const Header = () => {
 
     return (
         <header className="z-40 fixed top-0 left-0 right-0 bg-[#151515]/60 drop-shadow-lg backdrop-blur-lg">
-            <div className="w-11/12 md:container xl:w-9/12 mx-auto py-4 lg:py-5 flex justify-between items-center text-white">
+            <div className="w-11/12 md:container xl:w-9/12 mx-auto py-2 lg:py-5 flex justify-between items-center text-white">
                 <Link to='/'>
-                    <h4 className="font-black text-xl md:text-2xl">ScholarWorld</h4>
+                    <h4 className="font-black text-lg md:text-2xl">ScholarWorld</h4>
                 </Link>
                 <nav className="flex gap-6 uppercase items-center">
                     <motion.ul className={`uppercase flex flex-col lg:flex-row lg:items-center gap-6 font-extrabols fixed lg:static top-0 w-56 h-screen lg:h-auto lg:w-auto p-8 lg:p-0 bg-[#151515]/90 lg:bg-transparent z-50`}

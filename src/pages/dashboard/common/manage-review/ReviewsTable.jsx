@@ -49,7 +49,7 @@ const ReviewsTable = ({ reviews, loading, handleDelete }) => {
                                                 activeColor="#ffd700"
                                             />
                                         </td>
-                                        <td>{review.review}</td>
+                                        <td className="w-2/12">{review.review}</td>
                                         <td className="flex gap-2">
                                             <button
                                                 onClick={() => handleDelete(review._id)}

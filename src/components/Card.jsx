@@ -12,7 +12,7 @@ const Card = ({ _id, averageRating, scholarshipName, universityName, universityI
                     src={universityImage}
                     alt={universityName + "logo"}
                     className="rounded-xl" />
-                <div className="badge rounded-md h-auto px-2 py-1 absolute top-4 right-4 bg-white/40 border-0"><FaStar className="mr-1 fill-orange-400" />{averageRating}/5</div>
+                <div className="badge rounded-md h-auto px-2 py-1 absolute top-4 right-4 bg-black/80 text-white border-0"><FaStar className="mr-1 fill-orange-400" />{averageRating}/5</div>
             </figure>
             <div className="card-body p-4">
                 <h4 className="text-lg font-bold">{scholarshipName}</h4>
