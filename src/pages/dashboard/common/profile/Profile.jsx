@@ -1,11 +1,19 @@
+import { useRef } from "react";
 import Title from "../../../../components/Title";
 import useAuth from "../../../../hooks/useAuth";
 import useUser from "../../../../hooks/useUser";
+import UpdateModal from "./UpdateModal";
 
 const Profile = () => {
+    const modalRef = useRef()
     const [userData] = useUser()
     const { user } = useAuth()
     const { displayName, email, userType } = userData
+
+    const handleUpdate = () => {
+        modalRef.current.showModal()
+    }
+
 
     return (
         <>
@@ -21,7 +29,7 @@ const Profile = () => {
                                     alt={displayName + 'avatar'}
                                 />
                             </div>
-                            <button className="w-full px-6 py-3 bg-white text-brand-primary font-semibold rounded-full hover:bg-brand-accent hover:text-white transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-opacity-50">
+                            <button onClick={handleUpdate} className="w-full px-6 py-3 bg-white text-brand-primary font-semibold rounded-full hover:bg-brand-accent hover:text-white transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-brand-accent focus:ring-opacity-50">
                                 Edit Profile
                             </button>
                         </div>
@@ -43,6 +51,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
+            <UpdateModal modalRef={modalRef} />
         </>
     );
 }
