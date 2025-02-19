@@ -4,6 +4,7 @@ import Banner from "./Banner"
 import BookAppointment from "./BookAppointment"
 import FAQ from "./FAQ"
 import NewsLetter from "./NewsLetter"
+import SuccessChart from "./SuccessChart"
 import SuccessStories from "./SuccessStories"
 import TopScholarships from "./TopScholarships"
 
@@ -15,6 +16,7 @@ const Home = () => {
             <TopScholarships />
             <ApplicationTips />
             <SuccessStories />
+            <SuccessChart />
             <BookAppointment />
             <FAQ />
             <NewsLetter />
