@@ -6,7 +6,7 @@ const useUser = () => {
     const { user } = useAuth()
     const axiosBase = useAxios()
 
-    const { data: userData = {}, isLoading: userLoading } = useQuery({
+    const { data: userData = {}, isLoading: userLoading, refetch: userRefetch } = useQuery({
         queryKey: ['single-user', user?.email],
         queryFn: async () => {
             const res = await axiosBase.get(`/users/${user?.email}`)
@@ -14,7 +14,7 @@ const useUser = () => {
         }
     })
 
-    return [userData, userLoading]
+    return [userData, userLoading, userRefetch]
 }
 
 export default useUser

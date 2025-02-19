@@ -5,6 +5,7 @@ import useUser from "../../../../hooks/useUser";
 import UpdateModal from "./UpdateModal";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 
 
 const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
@@ -12,9 +13,10 @@ const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 
 const Profile = () => {
     const modalRef = useRef()
-    const [userData] = useUser()
+    const [userData, userRefetch] = useUser()
     const { user, updateDetails } = useAuth()
     const { displayName, email, userType } = userData
+    const axiosSecure = useAxiosSecure()
 
     const handleUpdate = () => {
         modalRef.current.showModal()
@@ -52,27 +54,33 @@ const Profile = () => {
             }
         }
 
-        updateDetails(name, image)
-            .then(() => {
-                Swal.fire({
-                    position: "center",
-                    icon: "success",
-                    title: "Profile Updated Successfully",
-                    showConfirmButton: false,
-                    timer: 1500
+        const updateUser = await axiosSecure.patch(`/users/${email}`, { name })
+
+
+        if (updateUser.data.modifiedCount) {
+            updateDetails(name, image)
+                .then(() => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Profile Updated Successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    userRefetch()
+                    e.target.reset();
+                    modalRef.current.close();
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Error Updating Profile",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                 });
-                e.target.reset();
-                modalRef.current.close();
-            })
-            .catch((err) => {
-                Swal.fire({
-                    position: "center",
-                    icon: "error",
-                    title: "Error Updating Profile",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            });
+        }
     };
 
     return (
