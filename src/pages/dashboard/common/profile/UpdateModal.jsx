@@ -1,4 +1,4 @@
-const UpdateModal = ({ modalRef }) => {
+const UpdateModal = ({ modalRef, handleUpdate }) => {
     return (
         <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
@@ -6,21 +6,22 @@ const UpdateModal = ({ modalRef }) => {
                 <p className="py-2 text-gray-600">Enter the details below to update.</p>
 
                 {/* Input Fields */}
-                <form className="space-y-4">
+                <form onSubmit={handleUpdate} className="space-y-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Name</label>
                         <input
                             type="text"
+                            name="name"
                             placeholder="Enter name"
                             className="input input-bordered w-full mt-1"
                         />
                     </div>
                     <div>
-                        <label className="block text-sm font-medium text-gray-700">Image URL</label>
+                        <label className="block text-sm font-medium text-gray-700">Photo</label>
                         <input
-                            type="text"
-                            placeholder="Enter image URL"
-                            className="input input-bordered w-full mt-1"
+                            type="file"
+                            name="photo"
+                            className="file-input file-input-bordered w-full max-w-xs"
                         />
                     </div>
                     <button type="submit" className="btn bg-brand-primary hover:bg-brand-accent text-white w-full">Save</button>

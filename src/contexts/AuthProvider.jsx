@@ -28,11 +28,27 @@ const AuthProvider = ({ children }) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
+    // const updateDetails = (name, url) => {
+    //     return updateProfile(auth.currentUser, {
+    //         displayName: name, photoURL: url
+    //     })
+    // }
+
     const updateDetails = (name, url) => {
-        return updateProfile(auth.currentUser, {
-            displayName: name, photoURL: url
-        })
-    }
+        if (url) {
+
+            return updateProfile(auth.currentUser, {
+                displayName: name,
+                photoURL: url
+            });
+        } else {
+
+            return updateProfile(auth.currentUser, {
+                displayName: name
+            });
+        }
+    };
+
 
     const logOut = () => {
         setLoading(true)

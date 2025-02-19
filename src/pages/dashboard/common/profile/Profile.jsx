@@ -3,17 +3,65 @@ import Title from "../../../../components/Title";
 import useAuth from "../../../../hooks/useAuth";
 import useUser from "../../../../hooks/useUser";
 import UpdateModal from "./UpdateModal";
+import axios from "axios";
+import Swal from "sweetalert2";
+
+
+const imagebb_key = import.meta.env.VITE_IMAGEBB_KEY
+const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 
 const Profile = () => {
     const modalRef = useRef()
     const [userData] = useUser()
     const { user } = useAuth()
     const { displayName, email, userType } = userData
+    const { updateDetails } = useAuth()
 
     const handleUpdate = () => {
         modalRef.current.showModal()
     }
 
+    const handleUpdateProfile = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target)
+        const { name, photo } = Object.fromEntries(formData)
+
+        const imageFormData = new FormData();
+        imageFormData.append("image", photo);
+
+
+        const res = await axios.post(hostingApi, imageFormData, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        })
+        const image = res?.data?.data?.display_url
+
+        updateDetails(name, image)
+            .then(() => {
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Profile Update Successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            })
+            .catch((err) => {
+                if (err) {
+                    Swal.fire({
+                        position: "center",
+                        icon: "error",
+                        title: "Error Updating Pofile",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+                return
+            })
+        e.target.current.reset()
+        modalRef.current.close()
+    }
 
     return (
         <>
@@ -51,7 +99,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <UpdateModal modalRef={modalRef} />
+            <UpdateModal modalRef={modalRef} handleUpdate={handleUpdateProfile} />
         </>
     );
 }
