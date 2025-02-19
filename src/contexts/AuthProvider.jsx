@@ -35,18 +35,16 @@ const AuthProvider = ({ children }) => {
     // }
 
     const updateDetails = (name, url) => {
-        if (url) {
+        const updateData = {};
 
-            return updateProfile(auth.currentUser, {
-                displayName: name,
-                photoURL: url
-            });
-        } else {
+        if (name) updateData.displayName = name;
+        if (url) updateData.photoURL = url;
 
-            return updateProfile(auth.currentUser, {
-                displayName: name
-            });
+        if (Object.keys(updateData).length === 0) {
+            return Promise.resolve();
         }
+
+        return updateProfile(auth.currentUser, updateData);
     };
 
 

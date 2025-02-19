@@ -13,55 +13,67 @@ const hostingApi = `https://api.imgbb.com/1/upload?key=${imagebb_key}`
 const Profile = () => {
     const modalRef = useRef()
     const [userData] = useUser()
-    const { user } = useAuth()
+    const { user, updateDetails } = useAuth()
     const { displayName, email, userType } = userData
-    const { updateDetails } = useAuth()
 
     const handleUpdate = () => {
         modalRef.current.showModal()
     }
 
     const handleUpdateProfile = async (e) => {
-        e.preventDefault()
-        const formData = new FormData(e.target)
-        const { name, photo } = Object.fromEntries(formData)
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const name = formData.get("name");
+        const photo = formData.get("photo");
 
-        const imageFormData = new FormData();
-        imageFormData.append("image", photo);
+        let image = user?.photoURL;
 
+        if (photo && photo.size > 0) {
+            const imageFormData = new FormData();
+            imageFormData.append("image", photo);
 
-        const res = await axios.post(hostingApi, imageFormData, {
-            headers: {
-                'content-type': 'multipart/form-data'
+            try {
+                const res = await axios.post(hostingApi, imageFormData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                });
+
+                image = res?.data?.data?.display_url;
+            } catch (error) {
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Image Upload Failed",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                return;
             }
-        })
-        const image = res?.data?.data?.display_url
+        }
 
         updateDetails(name, image)
             .then(() => {
                 Swal.fire({
                     position: "center",
                     icon: "success",
-                    title: "Profile Update Successful",
+                    title: "Profile Updated Successfully",
                     showConfirmButton: false,
                     timer: 1500
                 });
+                e.target.reset();
+                modalRef.current.close();
             })
             .catch((err) => {
-                if (err) {
-                    Swal.fire({
-                        position: "center",
-                        icon: "error",
-                        title: "Error Updating Pofile",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                }
-                return
-            })
-        e.target.current.reset()
-        modalRef.current.close()
-    }
+                Swal.fire({
+                    position: "center",
+                    icon: "error",
+                    title: "Error Updating Profile",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            });
+    };
 
     return (
         <>
