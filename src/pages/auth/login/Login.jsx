@@ -8,6 +8,10 @@ import useAxios from "../../../hooks/useAxios";
 import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    })
     const { loginUser, loginWithGoogle, setLoading } = useAuth()
     const [showPass, setShowPass] = useState(false);
     const axiosBase = useAxios()
@@ -91,6 +95,22 @@ const Login = () => {
             });
     };
 
+    const handleMod = () => {
+        setUser((prevState) => ({
+            ...prevState,
+            email: 'moderator@sw.com',
+            password: 'Call@911',
+        }));
+    };
+
+    const handleAdmin = () => {
+        setUser((prevState) => ({
+            ...prevState,
+            email: 'admin@sw.com',
+            password: 'Call@911',
+        }));
+    }
+
     return (
         <>
             <Title title="Login" />
@@ -106,6 +126,9 @@ const Login = () => {
 
                     <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
                         <h2 className="text-center text-2xl font-bold mb-6">Login</h2>
+                        <div className="flex gap-4">
+                            <button onClick={handleMod} className="btn btn-primary">Moderator Credentials</button>
+                            <button onClick={handleAdmin} className="btn btn-accent">Admin Credentials</button></div>
                         <form onSubmit={handleLogin} className="space-y-4">
                             <div className="form-control">
                                 <label className="label">
@@ -114,6 +137,7 @@ const Login = () => {
                                 <input
                                     name="email"
                                     type="email"
+                                    defaultValue={user.email}
                                     placeholder="email"
                                     className="input input-bordered"
                                     required
@@ -126,6 +150,7 @@ const Login = () => {
                                 <div className="relative">
                                     <input
                                         name="password"
+                                        defaultValue={user.password}
                                         type={showPass ? "text" : "password"}
                                         placeholder="password"
                                         className="input input-bordered w-full"
